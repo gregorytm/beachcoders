@@ -159,7 +159,7 @@ if(mysteryBox) {
  loggedInUser example
 
  LOGICAL OPERATORS
- and or not
+ and or not u use them all the time
  $$ || !
 in the console
 true && true
@@ -175,4 +175,10 @@ else {
   console.log("invalid")
   }
 
-  examples with variables
+let num = 6;
+if(num >= 1 && num <= 10) {
+  console.log('Number is between 1 and 10');
+}
+else {
+  console.log('Please guess a number between 1 and 10')
+};

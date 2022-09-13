@@ -1,0 +1,468 @@
+OR ||
+pipe character above neter
+If one side is true, the whole thing is true
+
+in console
+-1 !== -1 || 10 === 10
+10/2 === 5 || null
+0 || undefined
+true || false
+true
+true || false
+true || true
+
+IN JS
+let age = 76;
+if(age < 6 || age >= 65) {
+  console.log('You get in for free!)
+}
+else {
+  console.log('child price is $5, adult price is $10');
+}
+change age to 5, 28, others
+
+let choice = "beef jerkey";
+if(choice === 'cheese itz' || choice === 'beef jerkye' || choice === 'fat sals') {
+  console.log("good choice");
+} else {
+  console.log("lets pick something else")
+}
+in real world we wold use arrays or objects but this shows how it could work
+
+NOT ! and !==
+what are the two other  operators (and &&, or ||)
+
+in console
+!null //why is null false?//cuz its falsy
+!47
+!true
+!0
+!''
+45
+
+expressions
+!(0 ===0)
+!(100 <= 101)
+
+there is no clear cut example of how to reach an outcome,
+nested examples, if else, if else with operatiors (&& || !)
+
+let loggedInUser;
+if(loggedInUser) {
+  //do something
+}
+lets rewrite to check and do somethign if no loggedInUser
+if(!loggedInUser) {
+  console.log("invalid acess");
+}
+if we just want to check if there is not a logged in user we could use !
+
+these examples are silly but we are just learning so we but in silly examples
+
+let wineChoise = "roase";
+lets write to function to check the two types of wine we have
+
+if(wineChoise !== 'rose' && wineChoise !== 'red') {
+  console.log("we dont currently have that in stock")
+}
+now lets try writing the same functionality a different way
+
+if (!(wineChoise === 'rose' || flavor === 'red')){
+    console.log("order accepted")
+}
+
+quiz
+let num === 1313;
+num === 1313 || num === 13 && mum > 1314;
+true         || fase        &&  false //so u would think it is false
+BUT it is true because && operator takes presidence over ||
+if we wanted || to run first we would need to group it in ()
+
+the order of precedence is ! && ||
+() alers the order
+
+look at the mdn page
+
+let x = 13
+x < 3 && x > 1
+
+SWITCH STATEMENTS
+not common but out there
+use option delete to make this go faster
+let day = 3;
+
+if( day === 1) {
+  console.log("SUNDAY");
+}
+else if( day === 2) {
+  console.log("MONDAY");
+}
+else if( day === 2) {
+  console.log("TUESDAY");
+}
+else if( day === 2) {
+  console.log("WEDNESDAY");
+}
+else if( day === 2) {
+  console.log("THURSDAY");
+}
+else if( day === 2) {
+  console.log("FRIDAY");
+}
+else if( day === 2) {
+  console.log("SATURDAY");
+}
+else {
+  console.log("INVALID DAY");
+}
+//commont oout when done
+
+switch(day) {
+  case 1:
+    console.log("SUNDAY");
+  case 2:
+    console.log("MONDAY");
+  case3:
+    console.log("TUESDAY");
+  case4:
+    console.log("WEDNESDAY");
+}
+but it will run every console.log after it matches a day
+so if we add break it will check every condition
+option mouse click to add in break`
+
+switch(day) {
+  case 1:
+    console.log("SUNDAY");
+    break;
+  case 2:
+    console.log("MONDAY")
+    break;
+
+  instead of else, we can run default
+  switch(day) {
+  case 1:
+    console.log("SUNDAY");
+  case 2:
+    console.log("MONDAY")
+    default:
+      console.log"NOT A DAY')
+  }
+
+  let emoji = "happy face";
+
+  switch(emoji) {
+    case 'happy face';
+      console.log("yellow");
+      break;
+    case 'sad face';
+      console.log("yellow");
+      break;
+    case 'eggplant';
+      console.log("purple");
+      break;
+    case 'heart';
+      console.log("red");
+      break;
+    case 'lips;'
+      console.log("red)
+      break;
+  }
+
+    switch(emoji) {
+    case 'sad face';
+    case 'happy face';
+      console.log("yellow");
+      break;
+    case 'eggplant';
+      console.log("purple");
+      break;
+    case 'lips';
+    case 'heart';
+      console.log("red");
+      break;
+  }
+
+  works best if you are just checking for one thing
+
+TERNARY OPERATORS
+takes an if or an else statement and turns it into one line of code
+used alot in javascript
+called ternary operatior because there are three peaces
+condition ? expIfTrue: expIfFalse
+
+if symbol = "shamrock"
+
+if(symbol === "shamrock") {
+  console.log ("luckey")
+} 
+else {
+  console.log("bad luck")
+}
+
+symbol === "shamrock" ? console.log('lucky!') :console.log('BAD!');
+
+it works best inbeded in html
+
+let status = "offline";
+
+let color;
+if(status === "offline){
+  color = 'red'
+}
+ else {
+  color = "green"
+ }
+
+ if color = status === 'offline' ? 'red' : 'green';
+ used a lot in react
+
+ ARRAYS and OBJECTS
+ so for all we have seen are single value primite datatypes
+ BUT there are collections of data that are all over the place
+ called arrays and objects 
+ We have seen the Math object Math.pi, Math.floor() string.toUpperCase
+
+ARRAYS
+arrays collect a list of values "primitive datattypes" into one structure
+
+like a pill divider or a filing cabinit
+look at examples, playlists, reddit comment list
+IN a new JS file
+let student = []
+we have seen [] before on "hahahah"[1] but thise use is different
+after an = it makes an empty list
+
+let shoppingList = [ "cheeseitz", "pretzles", "beer"] ;
+let luckyNumbers = [12,8,68]
+
+let myStuff=[16 , "shamrock", true, "yes", NaN]
+
+new Array(1,2,3,4,5)
+
+ACCESSING INFO OUT OF ARRAYS
+
+arrays index
+let colors = ['red', 'orange', 'yellow']
+colors.length
+colors[0];
+colors[1];
+colors[2];
+similar to a string, a string is just a specialized arrays
+how do we get the very last item in a list?
+colors[colors.length-1]
+strings are immutable we can not change the value at one index
+let string = "hahha"
+string[0] ="b"
+
+Arrays are mutatable
+let shoppingList = ["cheese sticks", "milk"]
+shoppingList[0] = "cheese heads"
+shoppingList[2] = "ice cream"
+clunky way of doing it shoppingList[shoppingList.length] = "tomatoes"
+add potatos
+keep in mind that when u replace something with [] it is completely gone
+change cheese to bread
+
+ARRAY METHODS
+
+PUSH - adding to the end
+Pop - removing from the end
+Shift - removing from the start
+unshift - add to the start
+
+look at the mdn docs for Array
+the side bar has a bunch of built in methods like string
+
+shoppingList.push('bread')
+push value to shoppingList in the concole
+it returns a value
+it mutates the value and returns something new unlike string.toUpperCase
+const nextItem = topSongs.pop()
+
+SHIFT AND UNSHIFT
+they seem reversed of what they actually are
+it comes from an older language that predates javaScript
+
+in console
+let todoList =["mow the lawn"]
+todoList.unshift['do the dishes']
+todoList.unshift['clean the bathroom'];
+todoList.unshift('laundry')
+
+todoList.shift()
+look at the return 
+
+unshift lets u add multiple things at once
+todoList("feed pets", "clean the kitchen")
+adds them inverse of if u added them sepratly
+todoList ("more laundry");
+todoList("clean closit")
+same with push can add multiple things
+push and pop a more common but shift and unshift are still used.
+
+MORE ARRAY METHODS
+concat
+look it upo on mdn
+does not mutate the array, it creates and returns a new array
+
+IN JS
+let fruts = ["apples", "bannanns"]
+let vegies = ["carrots", cellary"]
+
+console.log fruts.concat(veggies)
+console.log veggies.concat(fruits)
+
+let meats = ["flank steak", "ckicken wings"]
+
+let allFood = fruits.concat(veggies, meats)
+
+Array.includes
+Look up on mdn
+
+ fruits.includes('flour")
+ vegies.includes('carrots")
+ vegies.includes('carrots red")
+add carrots red to our vegie array
+ vegies.includes('carrots purple")
+
+ We can also include a start index
+ veggies("carrots", 3)
+ veggies("carrots", 0)
+ veggies("onions", 3)
+
+if (vegies.includes('carrots")) {
+  console.log("i hate carrots)
+}
+
+Array.indexOf()
+works just like string.indexOf()
+returns -1 if not found
+
+if(veggies.indexOf('flour') !== -1) {
+  //do something
+}
+
+if(veggis.inclues'flour) {
+  //do something
+}
+
+reverse
+straight forward
+
+let letters = [a,b,c,d,e,f,g];
+letters.reverse()
+
+letters.join()
+default will join with ,
+but u can add whatever
+letters.join("&)
+letters.reverse().join('.');
+what happens when we join numbers?
+[12.3, 60, true].join()
+it turns them into a string
+
+array.slice
+look up on mdn
+takes a portin of an array and gives u a new array back
+does not mutate
+
+let animals = ["ptyradactal", "pigins", "penguans", "sharks", "turtles", "fish", "lizards", "tortus"]
+
+let birds = animals.slice(0, 3)
+
+let waterAnimals = animals.slice(3, 5)
+
+let reptiles = animals.slice(5, 8)
+OR
+let reptiles = animals.slice(5)
+
+aniamls.slice()
+used to create a quick copy of an array
+
+array.splice()
+look it up on mdn
+replaces, adds or removes eliments in an array
+
+let animals = ["ptyradactal", "pigins", "penguans", "sharks", "turtles", "fish", "lizards", "tortus"]
+animals.splice(1,0,"t-rex)
+animals.splice(3,2)
+returns items deleted and aniamls is 2 items shorter
+
+just adding 2
+animals.splice(3,0, 'snake', 'frog')
+alwasy need the 0 otherwise we will confuse splice
+
+deleting first 2 items and repacling with someting else
+animals.splice(0,2, "SHARK!", "ptyradactal!")
+
+ARRAY.sort()
+look it up on mdn
+
+let people =[Greg, James, Sally, Wayne, Darcy]
+people.sort()
+if we look at people, it was updated, sorted in place, returns the updated array
+
+let nums =[10,123123.2,122,22,99]
+let nums.sort()
+converets numbers to strings then compairs there utf codes
+why, i dont know?
+look at the mdn docs on how people whould use it with numbers
+they use it by passing in a function in the argument
+
+REFRENCE TYPES IN JS
+step back to primitive datatypes
+
+in console
+let fruit = "orange"
+let color = fruit
+fruit = "watermelon"
+what is the value of color?
+
+value type variable
+all are variables are stored in memory.
+a little slot for each variable
+
+once u save a primite data type to a variable its in the var, stored in the jar of space
+
+what javascript does with arrays is it stores a refrence to array, 
+like a roadmap to where thee array of info is stored like a street address
+cant see it, hard to get jS to print it but it is there.
+
+let nums = [5,6,7,8]
+let otherNums = nums;
+the array is not stored in the space of nums but instead a refrence is stored to the nums  an address to the array
+and when we create otherNums we give it the same address in memory as nums
+
+nums.push(9)
+then look at otherNums it reflects the change, they both are looking at the same space in memory, same address
+primite dataypes are hard stored in memory
+arrays & objects both work this way, an address or arrow in memory
+
+CONST & ARRAYS
+in console
+let x=34;
+x +=5
+we changed the value of x
+const state="california"
+state ="Texas" //error
+
+arrays dont store data, they store a refrence
+so if the refrences does not change the data can change
+
+const myEggs = ['brown', 'brown'];
+myEggs.psuh('green')
+we are not updating the refrence
+myEggs = ["black", "blue"] //error
+we changed the refrence, we changed the arrow
+const pi=3.14
+cant change
+const foods = [ground beef];
+foods.push(taco shells)
+foods.pop x2
+what does foods now?
+cannot do foods = []
+
+beacuse of this const is used all the time instead of let
+you would need a good reason to have an array point to a new array in memory almost never will
+that is why we use const
