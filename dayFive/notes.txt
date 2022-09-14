@@ -466,3 +466,26 @@ cannot do foods = []
 beacuse of this const is used all the time instead of let
 you would need a good reason to have an array point to a new array in memory almost never will
 that is why we use const
+
+const colors = [
+  ['red', 'green'],
+  ['orange', 'puprle'],
+  [blue, navy blue]
+]
+colors[2][0]
+colors [1][1]
+
+why nest arrays?
+ususally u want to use an array if the order matters
+
+const board = [
+  ['0',null, 'X'],
+  [nujll, 'X', 'O'],
+  ['X', 'O', null]
+]
+
+const colors = [
+  ['red', [ 'green', 'lime gree'] ],
+  ['orange', 'puprle'],
+  [blue, navy blue]
+]

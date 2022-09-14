@@ -1,0 +1,186 @@
+When would an array not work best
+
+movies/views steps/calories burned 
+if u used an arary you would need to note all the different peaces of data.  
+every array would need a unique name
+
+const gregs fitBitData = [
+  1234,
+  12345,
+  12304
+]
+
+enter the jS Object
+where an array uses the index as the key and our data as the value
+an object lets us set the values ourselves
+
+we use {} instead of []
+
+const gregsFitBitData = {
+  total Steps: alkdsfjaksjf,
+  total miles; 12334,
+  avg CalorieBurn: 384,
+}
+objs ar collections of prperties
+a big blob of data where the order does not matter
+we dont use the index but the key to access the value
+python calls objects dictionary
+for a lot of data collections it is a better option 
+
+sometimes arrays make sense, when we want the order to be tied in with the data
+example: race results, sports results, game results, anywhere we want the order to mater
+
+make a vidoe game palyer object
+then look at the object in console.//it is alphabatised in console
+remember the order does not matter in jS objects
+
+To access a property in an array we use the . method like we have seen
+gameCharacter.name
+anything can be a value, strings, nums, boolean
+what about the keys,
+the keys are automaticaly converted to strings
+numbers will be converted to strings
+comma is optional if you hve one property but it is required if u have multiple
+gameCharacter.100//unexpected numbers
+gameCharacter[100]
+variable names cant have a space in the variable
+let my dogs = 'adfadf'
+let 101dalmations = 'a movies
+we have the [] notation because key names can have numbers and spaces
+
+const colors = {
+  red: '#ed4d4b',
+  yellow: '#f9ca24',
+  blue : '#30336b'
+}
+
+colors.blue
+colors.yellow
+colors[yellow]//error
+colors['yellow']
+
+let userColor = 'yellow'
+colors[userColor]
+colors.mysteryColor//error
+colors["yel"+"low"]
+
+I try to use the dot notation whenever possible 
+shorter and easier to understand imo
+somtimes you need to use [] when using a non valid jS name or if you have a dynamic key name
+
+ADDING AND UPDATING OBJ KEYS AND values
+
+const playerHighScore = {};
+
+playerHighScore['superdude510] = 600;
+
+can also use dot notation
+playerHighScore.'dirtyDog420' = 350;
+look at user playerHighScore
+
+how to update?
+playerHighScore[superDude510] = 10000;
+can also use dot notation
+playerHighScore.superDude +=10
+
+NESTED ARRAYS AND objects
+
+const student = {
+  firstName : "John",
+  lastName  : "Dough",
+  strengths : ['Math', 'Science'],
+  exam scores : {
+    midterm: 45,
+    final 81
+  }
+}
+
+Quiz: how would i access the midterm and final?
+student.exams.midterm 
+what if i want to add them togeather and divide by 2?
+const avg= (student.exam.midterm + student.exam.final)/2
+
+we can use dot notation multiple times and to chain them togeather
+
+another example
+const shoppingCart = [
+  {
+    product: 'carrots',
+    price: 1.25,
+    quantity: 1
+    },
+    {
+      product: 'beef jerkey,
+      ...
+    }
+]
+
+Ths way we get the order and can store objects
+we can also do arrays in objects
+
+const game {
+  player1: 'Blue',
+  player2: 'Red'
+  gameBoard:[[x,0,x],...]
+}
+
+change players to player1: {
+  username:greg
+  team:x
+  color blue
+}
+
+Obj and array refrence types
+similar to arrays, objects can change as long as the address does not change
+
+const colors = {
+  red: '#ed4d4b',
+  yellow: '#f9ca24',
+  blue : '#30336b'
+}
+
+const colors2 = colors
+
+so if we update colors2
+
+colors2.green ='green hex code';
+both colors and colors2 is updated, same refrence in memory
+main point objects are refrence types just like arrays
+should alwayse use const, were as primitave datatypes we use let
+
+OBJECT & ARRAY EQUALITY
+we have seen teh equality operator
+
+1 === 1 but how do they work with objects?
+
+let nums = [1,2,3];
+let nums2 = [1,2,3];
+
+nums === nums2// returns false, but why?
+try nums == nums2// also false
+this is because they are different refrence types
+
+this is becase an array or object are too big to store in space the same way we would store a string or numbers
+so jS just stores the refrence
+when we compaire them using === all we are doing is comparing the address where they are stored in memory
+
+Quiz: Using what u know. make two arrays that when compaired using === will evaluate to true?
+
+let nums3 = nums
+
+const user = {
+  username:"",
+  email:"",
+  notifications =[],
+}
+user.notifications === [] // what does this evaluate to
+how can we check to see if notifications are empty?
+user.notifications.lenght === 0
+how can we shorten that more?  is 0 truthy or falsy
+(!user.notifications.lengh);
+
+its easy when your checking an empty array
+how would u check to see if nums has the same value as nums2
+we dont have an easy way to check untill we get more into loops
+all the === will do is check to see if its a similar refrence in memory
+{} === {} //false

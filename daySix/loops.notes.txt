@@ -1,0 +1,273 @@
+first we talked about primitive data types and variables
+then we talked about coditionals
+then data structurs ararys & objects
+
+now we get to learn looping, how to repeat code
+examples: game loops, ohters
+we are going to see a few differnt type of loops
+ 4 main loops for loop, most common type, while loops. then data structurs and looping over data + much more
+
+Loops are all about doing things repeatedly
+if we wanted to print code to the console ten times we could use a loop to do that
+
+There are many types of loops are: for loop, while loop, for of loop for in loop
+
+sometimes it can be the same outcome sometime it has a dynamic outcome
+reddit example, one large object and then it loops over it
+if there are ten posts, or 100 posts, its not hard coded 
+2048.com
+if playable moves still exist then keep the game going.
+if playable moves are 0 then game over or you won
+
+our first loop FOR LOOP
+syntax is weird the first time
+for (
+  [initial Expression];
+  [conditional];
+  [increament expression]
+) {
+  do something
+}
+
+what we know, if we wanted to say hello in the consoel ten times
+console.log("Hello)
+console.log("Hello)
+console.log("Hello)
+console.log("Hello)
+...
+
+for loops we define a variable, like a countner
+starting value 0 but could be 10 or 50
+stopping value 10 20 or 60, gives us 10 iterations
++1 how to change the value each time
+
+simple example:
+walk trhough this
+for (let i = 1; i <= 10; i++) {
+  console.log("hello", i)
+}
+
+for (let i = 5; i <= 10; i+=3) {
+  console.log("hello", i)
+}
+
+lets make a loop that prints out the perfect squares 1-20
+perfect square is a number times itself
+
+for(let num = 1; num <= 20; num++) {
+  console.log(`${num}X${num} =${num * num}`);
+}
+
+for (let i = 100; i >= 0; i -= 5){
+  console.log("hello",i)
+}
+
+for (let i = 200; i<=0; i -= 25) {
+  console.log("oops wont work")
+}
+console.log("after the loop?")
+
+for (let i = 200; i>=0; i -= 25) {
+  console.log("will work", i)
+}
+
+INFINITE LOOPS
+loops are great but we can write them incorectly so the condition will never be true
+bad! most likely wont break ur computer but will crash the browser
+
+/**for (let i = 20; i >=0; i++) { **/
+  console.log(i)
+ }
+
+ this would print endlessly, the computer would get jerkey on the mouse and clicks and the fans would start going really fast
+ you want to avoid using === !==
+
+ FOR LOOPS AND ARRAYS
+ 
+ const animals = ['lions', 'tigers', 'bears']
+
+ for( let i = 0; i < animals.length; i++) {
+  console.log(i, animals[i]);
+ }
+ cant use <= because the last item would be undefined
+
+ const bankFigures = [100, 28, 334, 1,0000];
+
+ for (let i = 0; i < bankFigures.length'; i++) {
+  console.log(i, bankFigures[i])
+ }
+
+const busnessClients = [
+  {
+    clientName: 'Bruce Wayne',
+    finances: 100,0000
+  },
+   {
+    clientName: 'Clark Kent',
+    finances: 10000
+  },
+   {
+    clientName: 'Oswald Copelpot',
+    finances: 10,0000
+  },
+   {
+    clientName: 'Harley Quin',
+    finances: .01
+  },
+]
+
+lets print out the clients name and finances
+
+for(let i=0; i < busnessClients.length i++) {
+  console.log(`${busnessClients[i].clientName}`)
+}
+
+lets rewrite with variables
+for(let i=0; i < busnessClients.length i++) {
+  let currentClient = busnessClients[i];
+  //console.log(currentClient); //
+  console.log(`${currentClient.clientName} has ${currentClient.finances} available funds`)
+}
+
+lets loop through a startinge and have it iprint it out backwards to us
+
+const ourPhrase = 'racecar';
+
+for(let i = ourPhrase.length -1; i >= 0; i--){
+  //console.log(i)//
+  console.log(ourPhrase[i])
+}
+
+const busnessClients = [
+  {
+    clientName: 'Bruce Wayne',
+    finances: 100,0000
+  },
+   {
+    clientName: 'Clark Kent',
+    finances: 10000
+  },
+   {
+    clientName: 'Oswald Copelpot',
+    finances: 10,0000
+  },
+   {
+    clientName: 'Harley Quin',
+    finances: .01
+  },
+]
+
+let total = 0; //if we put this in the loop we we be redefineding total everyt itme we loop
+for(let i=0; i < busnessClients.length i++) {
+  let currentClient = busnessClients[i];
+  total += currentClient.busnessClients
+}
+//console.log(total);//
+console.log(total/busnessClients.length)
+
+NESTED LOOPS
+
+for (let i=1; i <=10; i++){
+  console.log('OUTER LOOP:`, i )
+  //technically we could name it i again but that has problems 
+  for(let j = 10; j >=0; j-=2) {
+    console.log('!--INNER LOOP', j)
+  }
+}
+
+outer loop takes a long time in computer time BigO
+
+const gameBoard[
+  [12,5,19,82],
+  [64, 12, 17, 32],
+  [21,81,32,19]
+]
+
+if we want to sum all the values we need to loop twice
+4 elements across
+
+for(let i = 0; i < gameBoard.length i++){
+  console.log(gameBoard[i]);
+}
+
+we need to loop through each sub array
+
+for(let i = 0; i < gameBoard.length i++){
+  let row = gameBoard[i];
+  consoel.log(row)
+  for(let j = 0; j < row.length; j++){
+    console.log(row[j]);
+  } 
+}
+
+let totalScore = 0;
+
+for(let i = 0; i < gameBoard.length i++){
+  let row = gameBoard[i];
+  for(let j = 0; j < row.length; j++){
+    totalScore += row[j]
+  } 
+}
+
+WHILE LOOPS
+
+similar to for loops but can be more flexable sometimes
+while() {
+}
+
+for (let i=0;i<=5; i++) {
+  console.log(i)
+}
+
+let j = 0;
+while(j <= 5){
+  console.log(j)
+  j++;
+}
+not the best use of a while loop but it does work
+not how most peole use while loops, would use a for loop
+
+works best when you dont understand how many times somehing is going to run.
+2048 example, the game does not know how many turns it will takes 100, 1000?
+chess.com the computer does not know how many moves will occure
+while(livesLeft > 0)
+
+number guessing game
+const target = Math.floor(Math.random() * 10)
+console.log(target)
+
+const target = Math.floor(Math.random() * 10)
+const guess = Math.floor(Math.random() * 10)
+while(guess !== target) {
+  //need to make the condition false at some point so the loop stops
+  console.log(`Target number: ${target} Guessed number: ${guess}`)
+  guess = Math.floor(Math.random() * 10)
+}
+console.log(`Target number: ${target} Guessed number: ${guess}`)
+console.log(`you won!`)
+
+while some condition
+in the loop update or try to make that condition false
+
+BREAK;
+can use to stop a loop from going on
+u can use it in a for but uncommon.
+for (let i = 0 i <10 i++) {
+  console.log(i);
+  if(i === 5 ){
+    break;
+  }
+}
+more common in a while loop
+
+const target = Math.floor(Math.random() * 10)
+const guess = Math.floor(Math.random() * 10)
+while(true) {
+  if(target === guess) break;
+  console.log(`Target number: ${target} Guessed number: ${guess}`)
+  guess = Math.floor(Math.random() * 10);
+}
+console.log(`Target number: ${target} Guessed number: ${guess}`)
+console.log(`you won!`)
+
+not the best way to write a while loop, while(true) can be confusing to read 
