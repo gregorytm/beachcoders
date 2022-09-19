@@ -1,4 +1,4 @@
-pwm
+pwd
 ls
 cd 
 relative and absolute paths

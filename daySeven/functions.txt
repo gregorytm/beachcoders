@@ -1,0 +1,158 @@
+FUNCTIONS
+
+//central to the language
+//must be able to read functions
+//very crutal to jS as a language
+//a lot of options and things we can do with functions
+
+//What is a function?
+//it is a reusable procedure or chunk of code
+//lets us write reusable, and modular code
+//we write code that we can recall and execute when needed rather then right away
+/we use them everywhere
+//examples get fantisy team, chess.com or reddit get user go search
+//they are like little macheans we can turn on and off
+
+two step process for a function
+first is to define one, write the code of what it should do
+next is to exicute or run the code, tell the browser "hey run this funciton now"  write it and run it
+we have been running functions(calling them methods, there is a difference we will address later) using ()
+
+//in console
+"hello world".toUpperCase()//thats a method we will call a function
+//we have been using functions but not defining our own
+//a few different ways to write them but they usually consist of same elements
+//function declaration
+//name must be a valid identifier, no reserved keywords
+function funcName() {
+  //do something
+}
+
+function jukeBox(){
+  console.log('Road shimmer');
+  console.log('wigglin/' the vision');
+  console.log('im swimming in a mirror')
+}//so everyitme we exicute jukeBox it will give us or song
+//not very useful but its our first function!
+//we can exicute 3 times but calling it 3 times or by using a loop
+jukeBox();
+jukeBox();
+jukeBox();
+
+for(let i =0; i <= 20; i++){
+  console.log(jukeBox());
+}
+
+function ddDice() {
+  let roll = Math.floor(Math.random() *12) +1;
+  console.log(`Dice roll ${roll}`)
+}
+
+function defensiveRolls(){
+  ddDice()
+  ddDice()
+  ddDice()
+  ddDice()
+}
+
+FUNCTION ARGUMENTS:
+function data passed into it
+.toUpperCase() Math.pie()
+example that does take an arguments
+"hello world".indexOf('e')
+
+to make a func expect arguments u just add a var name in the ();
+
+function greet() {
+  console.log("Hello World')
+}
+
+function greet(name) {
+  console.log(name)
+  console.log(`hello ${name})
+}
+
+function diceRolls(diceRolls){
+  for(let i=0; i< nulRolls; i++){
+    ddDice()
+  }
+}
+
+function square(num){
+  console.log(num * num);
+}
+//the word or number we pass in is the actual number
+//when defining a function we call it paramiter
+
+function sum(x,y) {
+  console.log(x+y);
+}
+//order does not mater
+
+
+function divide(x,y) {
+  console.log(a/b);
+}
+//order does mater
+//try puting a letter instead of a number
+//try just passing in one number
+//if value is missing it becomes undefined
+
+RETURN 
+currently we are just printing a number and not returning 
+'hello'.toUpperCase() in the text editor
+that code runs but then we lose it forever
+if we want to caputre it we need to use a var
+const greet = "hello".toUpperCase();
+printing to console is not the same as returning
+run code in console "hello".toUpperCase();
+run in console console.log("hello".toUpperCase())
+it returns undefined
+
+most webpages wont have anything printed in console.lo unless:
+a dev forgot to remove it
+or warnings (ex facebook)
+
+//in console
+const num = divide(1,2)//returns undefined
+there is no value, it prints to console but we have no output
+to get a return we use the return keyword
+
+//in txt editor
+function divide(x,y) {
+  return(a/b);
+}
+
+//in console
+const total = divide(1/2)
+
+alwasy need to return one value
+if u need multipe things u can return an array, object or maybe a string but it must be one thing
+return statements end function exicution, similar to break
+
+function square(x) {
+  return x * x
+  console.log("test test);
+}
+
+//we can use this to our advantage
+luckyNumber(num){
+  if(num === 12){
+    return true
+  }
+  else {
+    return false
+  }
+}
+//how can we rewrite func?
+//remve the else and just {}
+//less key strokes
+
+//we could also rewrite it into one line
+function luckyNumber(num) {
+  return num === 12;
+}
+
+function favSnack(snack){
+  return snack.toLowerCase() === 'cheezeits';
+}

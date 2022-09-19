@@ -1,0 +1,125 @@
+For of loops
+its newish to jS
+
+might not be suported in IE
+
+fir(variable of iterlas) {
+  statement
+}
+
+let articles = [ 'sports', 'movies', 'comics', 'books' ]
+
+for(leti=0; i <=articles.length; i++) {
+  console.log([i])
+}
+
+problem is it looks ugly;
+we dont need access to the i var
+
+dont use i most people think i relates to a number
+for(let article of articles) {
+  console.log(article);
+}
+
+for(let char of 'bubbaduke') {
+  console.log(char.toUpperCase())
+}
+
+magicSquare = [
+  [8,1,6],
+  [3,5,7],
+  [4,9,2]
+];
+
+lets just check vertically
+
+ugly for loop
+for(let i = 0; i< magicSquare.length; i++){
+  let row = magicSquare[i];
+  let sum = 0;
+  for(let j=0; j < row.length; j++;){
+    console.log(row[j]);
+    some+= row[j]
+    }
+    console.log(`${row} sumed to ${sum}`);
+}
+
+for(let row of magicSquare) {
+  let sum=0;
+  for(let num of row) {
+    sum += num;
+  }
+  consoel.log(`${row} summed to ${sum})
+}
+
+const prhaseOne = ["caromel", "hot", "milk", "hot"]
+const phraseTwo = ['popcorn', 'butter', 'duds', 'dogs']
+
+a for loop would be best
+for(let i =0; i<prhaseOne.length; i++) {
+  console.log(${`wordsArr[i]}, ${wordsArr2[i]})
+}
+
+const testScores = {
+  'Greg Marsh' : 100,
+  Darcy: 75,
+  Wayne: 63,
+  Laurie: 43,
+  Erik: 72
+}
+
+we cant use a for of loop
+for (let x of testScores) {
+  console.log(x)
+}//typeError
+
+//in console to show Object.keys 
+Object.keys(testScores)
+Object.values(testScores)
+
+for let(person of Object.keys(testScores)) {
+  console.log(person)
+}//what will this print?
+
+//use [] to access keys in objects
+for let (person of Object.keys(testScores)) {
+  console.log(person, testScores[person])
+}
+
+
+//what if we wanteed to find the avg test scores;
+const scores = Object.values(testScores)
+let total = 0;
+for (let s of scores) {
+  total += s;
+}
+total = total/scores.length;
+console.log(total)
+//rename total to avg
+
+FOR IN LOOPS
+//can only use to loop over keys and we use that key to get that value out
+const testScores = {
+  'Greg Marsh' : 100,
+  Darcy: 75,
+  Wayne: 63,
+  Laurie: 43,
+  Erik: 72
+};
+
+for(let person in testScores){
+  console.log(person);
+}//lets see what we get
+//add console.log(testScores[person]); under first console.log
+
+
+let total =0;
+for(let person in testScores) {
+  total += testScores[prop];
+}
+ console.log(`total number of questions answered correctly ${total});
+
+//you can use a for in for an array but u probably shouldent
+//an object has key value pairs
+//so does an array but the keys are numbers
+//objects tend to shift from browser to browser where arrays dont
