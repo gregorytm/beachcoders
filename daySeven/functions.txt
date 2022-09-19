@@ -156,3 +156,47 @@ function luckyNumber(num) {
 function favSnack(snack){
   return snack.toLowerCase() === 'cheezeits';
 }
+
+//do u remember the or operator
+//where should we put return false?
+function favSnack(arr){
+  for(let snack of snacks) {
+    if(snack === 'cheezeits' || snack ==='beefjerkey') {
+      return true
+    }
+  }
+  return false
+}
+//whenever we return, the function is over, even if its nested
+
+Quiz questions:
+Write a function passwordCheck
+have it accept two arguments: username and password
+password needs to be:
+-at least 10 characters long
+-cannot contain spaces
+-cannot contain the username
+if all checks pass, return true
+else return false
+
+
+//multipe ways to do it
+function passwordCheck(username, password){
+  if(password.length < 10){
+    return false
+  }
+  if(password.indexOf(" ") !== -1){
+    return false;
+  }
+  if(password.indexOf(username) !== -1){
+    return false;
+  }
+  return true
+}
+
+//we could use use else if and else but we dont need to
+//we can rewrite using OR
+//could also rewrite using variables
+//could also rewrite using not and AND
+//can rewrite many times over
+//writing the shorting amount of code is not alwasy best
