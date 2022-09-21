@@ -200,3 +200,138 @@ function passwordCheck(username, password){
 //could also rewrite using not and AND
 //can rewrite many times over
 //writing the shorting amount of code is not alwasy best
+
+MORE FUNCTION DETAILS
+what is javaScript scope
+
+it is the visability of variables 
+
+depending on where we define our variables determins where we can access them.
+
+function scopeTest() {
+  let idea = "sell small drink unbrellas";
+  console.log("1--",idea)
+}
+  console.log("2--",idea)
+
+  function scopeTest() {
+  let idea = "open a juiceBar";
+  console.log("3--",idea)
+}
+  console.log("4--",idea)
+
+lets us have a lot of functions with the same var name;
+lets get an error
+
+let idea ="any message"
+let idea = "any message"
+the error tells us hi has already been defined in this current scope
+
+Quiz question1:
+let greeting="hello"
+
+function greeting() {
+  const greeting="hello"
+}
+
+Question2:
+const flavor="vanilla"
+console.log(flavor)
+
+function iceCreamTruck() {
+  let flavor="chocolate"
+}
+iceCreamTruck();
+console.log(flavor)
+
+using VAR
+keep in mind object{} is different then object{}
+scopeTest() {
+  let flavor = "chocolate"
+}
+console.log (flavor);
+
+scopeTest() {
+  var flavor = "chocolate"
+}
+console.log (flavor);
+writing functions with var was very difficult
+let flavors = ['chocolate' 'cherry', 'vanilla']
+for (var i=0; i<flavors.length; i++) {
+  console.log(i)
+}
+console.log(i)
+
+Quiz
+function doubleNums(arr) {
+  const numbers=[];
+  for(let num of numbers) {
+    let result = num * 2;
+    result.push(double);
+  }
+  console.log(double);
+  return numbers;
+}
+
+how can we change to have access to double after function runs?
+
+function doubleNums(arr) {
+  const numbers=[];
+  let result;
+  for(let num of numbers) {
+    let result = num * 2;
+    result.push(double);
+  }
+  console.log(double);
+  return numbers;
+}
+
+function outerFunc() {
+  let flavor="vanilla";
+
+  function iceCreamTruck() {
+    console.log(flavor.toUpperCase())
+  }
+  flavor()
+}
+we can access flavors in the iceCreamTruck
+run iceCreamTruck in the console
+no access
+nested functions have access to any vars in parent functions
+
+function outerFunc() {
+  let flavor="vanilla";
+
+  function iceCreamTruck() {
+    let flavor="chocolate
+    console.log(flavor.toUpperCase())
+  }
+  console.log(flavor)
+}
+
+seems silly in normal jS but when u get to react its everywhere
+
+FUNCTION expression
+so far we have been defining functions with the function keyword
+function expression assigns it to a variable
+
+const flavor = function(iceCream) {
+  return iceCream.toUpperCase();
+}
+flavor("vanilla")
+
+
+function add(a,b) {
+  return a + b;
+}
+
+const add = function(a,b) {
+  return a + b
+}
+run in console
+
+const add = function sum(a,b) {
+  return a=b
+}
+run in console add() andd sum()
+this means we can pass them around as arguments
