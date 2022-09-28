@@ -333,5 +333,5 @@ run in console
 const add = function sum(a,b) {
   return a=b
 }
-run in console add() andd sum()
+run in console add() and sum()
 this means we can pass them around as arguments

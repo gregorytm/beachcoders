@@ -1,0 +1,303 @@
+More ON FUNCTIONS
+-functions are objects
+
+function add(x,y) {
+  return x+y;
+}
+
+const subtract = function(x,y){
+  return x-y;
+}
+
+function multiply(x,y) {
+  return x * y;
+}
+
+const subtract = function(x,y){
+  return x-y;
+}
+
+function divinde(x,y) {
+  return x / y;
+}
+
+now lets put them all in an array!
+
+const operations = [add,subtract, multiply, divide];
+now we have 4 functions in an array
+how do we access them?
+
+In CONSOLE
+operations[1]
+similar to if we just type add
+operations[1](2,4)
+
+now that we have them in a function we can loop over them with an array
+IN VS
+for(let function of operations){
+  funciton() //try running without the () then hardcode in numbers(3.5), nothing happens, then try saving them in a variable and console.log() it
+}
+we can store and use functions like any other value
+const funcTest = {
+  doMath: multiply
+}
+
+look at funcTest in console, it has the property doMath with value of our function
+IN CONSOLE
+thing.doMath
+thing.doMath(12,33)
+similar to .toUpperCase, [1,2,3,4].indexOf(2)
+functions are just values in values, we can save them to variables, we can call them dynamicaly.
+
+HIGHER ORDER FUNCTIONS
+higher order functions are just functions that operate with other functions.
+This means they can accept other functions as arguments
+return functions 
+IN VS
+function repeater(func) {
+  func();
+  func();
+}
+
+function joke() {
+  console.log("why do gorillas have big nostrols?");
+  console.log("because they have big fingers!");
+}
+repeater(joke)
+
+function repeatNumTimes(action, num){
+  for(let i = 0; i< num; i++){
+    action()
+  }
+}
+
+repeatNumTimes(joke, 20);
+
+function pickAFunc(func1, func2){
+  let number = Math.random();
+  if(number <0.5) {
+    func1();
+  } else {
+    func2();
+  }
+}
+
+FUNCTIONS THAT RETURN OTHER FUNCTIONS
+function factory
+IN VS
+function multiplyBy(num){
+  const func =  function(){
+    console.log("test)
+  }
+  return func
+}
+we pass in an annaomas function because we are going to caputure the return value in a var
+
+IN CONSOLE
+const test = multiplyBy
+
+IN VS
+rewrite to return function right away
+function multiplyBy(num){
+  return function(x){
+    return x * num;
+  }
+}
+focus just on the inners 
+  return function(x){
+    return x * num;
+  }
+ when this code is inside our function it returns functions
+
+ const triple = multiplyBy(3);
+ const double = multiplyBy(2);
+
+ IN CONSOLE
+ double(5);
+ triple(5)
+ 
+ const half = multiplyBy(0.5);
+our function making factory is giving us dynamic functions
+this also refers back to the conversation on scope, num is not defined in triple or double but we have access to it from the factory
+
+
+const setFunc = function(num) {
+  return num >= 0 && num <=18;
+}
+this funciton is set in stone, this is what it does
+But if we make a factory to make functions
+
+function makeBetweenFunc(x,y) {
+  return function(num){
+    if(num >= x && num <= y){
+      return true;
+    }
+    return false;
+  }
+}
+rewrite to be shorter
+
+function makeBetweenFunc(x,y) {
+  return function(num){
+    return num >= x && num <= y;
+  }
+}
+
+const test1 = makeBetweenFunc(0,18);
+const test2 = makeBetweenFunc(3,17);
+const theNinteies = makeBetweenFunc(1990,1999)
+const isNiceWeather = makeBetweenFunc(78, 85)
+
+CALLBACK FUNCTIONS
+functions that are passed into other functions
+our previous example
+function joke() {
+  console.log("why do gorillas have big nostrols?");
+  console.log("because they have big fingers!");
+}
+repeater(joke)
+joke being passed in a callback
+its just terminology
+
+setTimeout is a built in function that requires a callback
+setTimeout(func, 5000)
+look it up on MDN
+
+IN VS
+function annoyalator(){
+  alert("i hate alerts');
+}
+
+setTimeout(annoyalator,5000)
+
+setTimeout(function(){
+  alert("welcome")
+},5000)
+
+IN VS html page
+add a button tag at the bottom, right before the</body>
+then move teh app.js file below the button
+we need to move it below the button becasue we need our button to load before it loads the js file
+
+now the syntax is not important here but more the callback
+IN APP.JS
+const btn = document.querySelector('button');
+btn.addEventListiner('click', annoyalator)
+but if we dont have annoylator and we just want to use a function once we can pas in an annonamas function
+btn.addEventListiner('click' function(){
+  alert("annoy")
+})
+
+HOISTING
+a weird thing about js but something u should not stree over
+
+IN VS
+var dog="poodle";
+consoel.log(dog);
+what do we get when we run this code
+but what happens when we switch it up
+
+console.log(animal);
+var dog="poodle";
+but what happens when we comment out var
+the reason this happens is because of variable hoisting
+so when u declair a function vs will grab all the function declirations and move it to the toUpperCase
+
+console.log(animal);
+var dog="poodle"
+console.log(animal);
+
+now lets try it with let and const
+
+let dog='poodle';
+console.log(dog)
+
+console.log(animal);
+let dog='poodle';
+
+so with let they are not hoisted the same way they are with var
+
+function dog(){
+  console.log('bark bark');
+}
+dog()
+but what happens when we invert it
+
+dog()
+function dog(){
+  console.log('bark bark');
+}
+it still works?  so function declirationsare hoisted
+
+let dog = function(){
+  console.log('bark bark')
+}
+dog()
+works as normal but what if we change it
+
+dog()
+let dog = function(){
+  console.log('bark bark')
+}
+does not work
+but what if we try to look at dog before we run it
+console.log(dog)
+let dog = function(){
+  console.log('bark bark')
+}
+js still knows about it but its just undefined
+
+ARRAY CALLBACK METHODS
+useful array methods
+methods we see all the time
+forEach map filter, find, reduce, some, every
+
+const numbers = [22,34,55,87,54,27,31]
+
+numbers.forEach(function(num){
+  console.log(num * 2)
+})
+
+function printTriple(num) {
+  console.log(num)
+}
+
+numbers.forEach(printTriple)
+
+const characters[
+  {
+    name: 'gandolf',
+    class: [wizard, ring wrath],
+    level: 100
+  },
+  {
+    name:'gimlie',
+    class[dwarf, tavern seaker],
+    level: 75
+  },
+  {
+    name: 'bilbo',
+    class[hobbit, barral rider],
+    level: 12
+  }
+]
+
+books.forEach(function(character){
+  console.log(character.name.toUpperCase())
+})
+
+for(let character of characters){
+  console.log(character.title.toUpperCase())
+}
+
+we can also do this with an regular old for loop
+for(let i = 0; i< books.length; i++){
+  console.log(book[i].title.toUpperCase())
+}
+this is the oldest way to do it but we dont need access to the index so forEach was intrused and then for of
+
+using forEach we can still get the index you just need to ask for it
+
+numbers.forEach(num, idx){
+  console.log(idx, num)
+}

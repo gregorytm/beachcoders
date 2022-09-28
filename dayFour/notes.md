@@ -127,8 +127,7 @@ if alwasy needs to come first
 uber rating example
 
 ELSE
-video game example
-one else if
+video game example with one else if statement
 
 NESTING 
 we can nest conditionals inside conditionals
@@ -154,7 +153,7 @@ if(mysteryBox) {
  else {
   console.log('falsy')
  }
- try other numbers, try 0, nan, null, undefined, ""
+ try other numbers in mysteryNum, try 0, NaN, null, undefined, ""
  stratigy used in if else
  loggedInUser example
 
@@ -165,7 +164,7 @@ in the console
 true && true
 true && false
 false && false
-1 <= 15 && 'abc' === 'abc
+1 <= 15 && 'abc' === 'abc'
 
 let password = "super dude";
 if(password.length >= 6 && password.indexOf(' ') === -1) {
@@ -180,5 +179,5 @@ if(num >= 1 && num <= 10) {
   console.log('Number is between 1 and 10');
 }
 else {
-  console.log('Please guess a number between 1 and 10')
+  console.log('Please guess a number between 1 and 10');
 };
