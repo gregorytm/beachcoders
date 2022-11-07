@@ -1,0 +1,258 @@
+What is react?  The best way to learn about something new is to go to dhte docs
+They use the word library but its a bot more then that.
+
+Why use react?
+It makes it easy to make reusable components
+They make html and js into a class
+makes it easier and faster to build modular applications
+
+separation of concerns
+react is a tool that helps us do that.
+
+What is a framework?
+Frameworks are larger then libraries
+Provide "plueprints" for applications
+"opinionated" you need to lean in and embrase the inner workings.
+some of the big framworks right now
+Angular, Ember, Vue...what about React?
+compair Angular docs with React.
+what are the difference, Angular refers to itself as a framework where React calls itself a libraryp
+look at the angular freatures, lots of stuff. it's own ecosystem.
+React is much lighter, it does less for you out of the box.
+However most devs will use React with other tools such as React-Router, React-Redux
+its like choose your own adventure!
+you can use React by itself or some of the tools around.
+The reason its so popular is because it is flexable to what the dev wants.
+
+React Components.
+react docs/components and props
+components are the bulding blocks of react
+piece of UI & view logic
+
+Soon we will be creating our first react app but we need to set things up first
+Eventually we will use a tool called create react app but first we are going to do it the old fashon way
+to do this we are going to use a VS code plugin called live server.
+If we were to just open the file in the browser that would be called file protical but we want to mimic a server so we use liver server
+install the plugin liveserver, open up the file in vs code right click start live server.  This will automaticly update any changes made to the html page
+we can also start one up using the terminal python3 -m http.server
+we need to do this because a tool react uses called babble
+
+Our first component
+very simple component but it is a patern we will follow
+
+react docs/function and class components
+function components were not as feature heavy as class componenets but with the introduction of react hooks they became better
+we sill start with classes though.  notice class uses React.Component
+Create a basic index.html file 
+copy the 4 script tags into the head
+this is an oldschool way to make react we eventually will be using a tool called create-react-app that does all this for us.
+create an index.js file
+create this componenet in it
+
+class FirstComponent extends React.Component {
+  render() {
+    return <h1>Hello there!</h1>;
+  }
+}
+
+ReactDom.render(<FirstComponent />, document.getElementById("root"));
+try adding 3 more h1s
+
+class FirstComponent extends React.Component {
+  render() {
+    return <h1>Hello there!</h1>;
+    return <h1>Hello there!</h1>;
+    return <h1>Hello there!</h1>;
+  }
+}
+
+this will return an error, and what it tell us is we can only ever return one element,
+we can have a bunch of stuff in that element but it always needs to be wrappend around one <div>
+
+class components are the old fashon way of doing it, must use a render method
+
+Function componenets vs class componenets
+when react was new function components were just used for simplier dumb componenets,
+looks like traditional js functions, no render method needed
+rewrite FirstComponent as a function 
+function FirstComponent() {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+      <h1>Hello</h1>
+    </div>
+  );
+}
+
+Historically, function componenets could not use important features like state and lifecycle methods
+With the introduction of Hooks, we are able to do those more modern things in functions.
+up until hooks classes were used everywhere still very common but functions and hooks are becoming more popular.
+
+JSX - javascript extention or JavascriptXML, depends who you ask
+reactDocs/ introducing JSX
+JSX is not legal javascript 
+it needs to be "transpiled" to valid javascript
+to do this we use a tool called Babel
+
+common rules for JSX
+HTML tends to be a bit more easy going with it' rules but JSX is very strict
+All tags must be self closing and need a /
+must have a /
+
+Below givs an error, can we find what the error is?
+class JSXDemo extends React.Component {
+  render() {
+    <img src="UNSPLASHURL" />
+  }
+}
+it needs to be wrapped in a div only one return with jsx.
+reactDocs/JSX IN DEPTH
+as we can see there is a bunch going on under the hood here.
+
+lets go to babel.com/tryitout
+enter in a <h1>Test</h1>, see what it actually transpiles it into
+try this:
+<div>
+<h1>Test</h1>
+<img src"someurl"/>
+</div>
+see what it compiles out to.
+try another example.
+copy and paist what is returned into ur .js file
+
+EMBEDED JS IN JSX
+we can also do stuf flike {2*17} in jsx 
+not very pratical but we can also call functions in there.
+function getColor(){
+  const colors=['red','green','yellow','blue']
+  retun moods[Math.floor(Math.random() * moods.length)];
+}
+class classDemo extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Current favorite color {getColor()}</h1>
+      </div>
+    );
+  }
+}
+
+CONDITIONALS IN JSX
+how to display things selectively depending on data.
+
+reactDocs/conditional rendering
+If we scroll down we see it gives us a few differnt options
+a good article is "8 react conditional rendering methods" (https://blog.logrocket.com/react-conditional-rendering-9-methods/)
+there is not one correct way, lets do some examples
+
+class NumPicker extends Reactr.Component {
+  render() {
+    return (
+      <h1>your number is...
+    )
+  }
+}
+now lets create some logic to pick a random number
+function getNum(){
+  return Math.floor(Math.random()*10) +1;
+}
+then add to the class
+<h1>your number is {getNum()}</h1>
+lets refresh the page and see what happens, different numbhers?
+
+now lets add selective display
+to do this we will need to use turnary operators
+return(){
+  const num = getNum()
+  return (
+    <div>
+    <h1>Your number is {num} </h1>
+    <p>{num === 3 ? 'congrats!' : 'Unlockey'}</p>
+    </div>
+  )
+}
+
+now lets an an image to our conditional
+we could do this with another conditional
+return(){
+  const num = getNum()
+  return (
+    <div>
+    <h1>Your number is {num} </h1>
+    <p>{num === 3 ? 'congrats!' : 'Unlockey'}</p>
+    {num === 7 ? <img src="someimgurl" />: null}
+    </div>
+  )
+}
+
+but we that gives us a big ugly line so we can break it up like this
+return(){
+  const num = getNum()
+  return (
+    <div>
+    <h1>Your number is {num} </h1>
+    <p>{num === 3 ? 'congrats!' : 'Unlockey'}</p>
+    {
+      num === 7 
+      ? <img src="someimgurl" /> 
+      : null}
+    </div>
+  )
+}
+
+this still looks ugly but a bit better and it should still work
+we can refactor again
+return(){
+  const num = getNum()
+  return (
+    <div>
+    <h1>Your number is {num} </h1>
+    <p>{num === 3 ? 'congrats!' : 'Unlockey'}</p>
+    {
+      num === 7  &&
+        <img src="someimgurl" /> 
+    }
+    </div>
+  )
+}
+
+This works become of truthy and falsey
+we can even refactor this again
+run this in concole
+return(){
+  const num = getNum()
+  let msg;
+  if (num === 3){
+    msg = "lucky
+  } else {
+    msg = "not so luckey"
+  }
+  return (
+    <div>
+      <h1>Your number is {num} </h1>
+      {msg}
+    </div>
+  );
+}
+
+then change it to be 
+return(){
+  const num = getNum()
+  let msg;
+  if (num === 3){
+    msg = 
+    <div>
+    <h2>lucky number!</h2>
+      <img src="someImgUrl" />
+    </div>  
+  } else {
+    msg = <p>"not so luckey"</p>
+  }
+  return (
+    <div>
+      <h1>Your number is {num} </h1>
+      {msg}
+    </div>
+  );
+}
