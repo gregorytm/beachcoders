@@ -1,0 +1,250 @@
+PROPER REACT STRUCTURE
+so far we have just been using getElementById to get our class into the app
+but that would be very inneficient to make a bigger web app this way
+
+It's common setup to have the top most application be App.js that is rended inside Index.js
+Lets make a new index.html file, link in our react script tags.
+
+lets make a Welcome.js file.
+class Welcome extends React.Component {
+  render() {
+    return <h1>welcome to beachcoders<h1>
+  }
+}
+
+now lets make an index.js
+class App extends Ract.Componenet {
+  render() {
+    return (
+      <div>
+        <Welcome />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, documenet.getElementById('root));
+
+now lets include our welcome file in our index.js
+it is nothing special but if we wanted to add <Welcome /> three more times we would just need to add two more welcomes <Welcome /> in index.js
+
+Lets grab our numpicker function we created earlier and create a new file for it.
+NumPicker.js
+then lets improt that file into our html file
+then in our index.js APP class lets add <NumPicker />
+
+When we use Create-React-App it will do at lot of this for us
+but for now we are just learning the way react works.
+
+now lets talk about PROPS
+so far we have just been passing in componenets around without any data
+but it is more common to pass componenets around with data.
+Much like how we have been using our script tags
+<script> is the componenet but we give each a unique src as a prop
+
+in one of our <Welcome to="Daniel" from="greg"/> componenets
+then add a console.log(this.props) in welcome
+check it out in console
+if we just wanted one specific prop we could ask for it, console.log(this.props.to)
+how can we use this in our class?
+
+class Welcome extends React.Component {
+  render() {
+    return <h1>welcome{this.props.to} to beachcoders from {this.props.from"<h1>
+  }
+}
+some people will create a props var to make it shorter
+const props = this.props;
+
+REQUIREMENTS of PROPERTIES
+we use props to configure our componenets
+properties are immutable, we can not change them into components
+
+class Welcome extends React.Component {
+  render() {
+    this.props.from = "James"
+    return <h1>welcome{this.props.to} to beachcoders from {this.props.from"<h1>
+  }
+}
+this example gives us an error
+we also can not add to it.
+
+properties can be strings but we can also pass in numbers, objects, arrays, we just need them in {}
+
+now lets make an index.js
+class App extends Ract.Componenet {
+  render() {
+    return (
+      <div>
+        <Welcome 
+          to"Danial" 
+          from="greg" 
+          num={3}
+          data={[1,2,3,4,5]}
+          bestTeacher={true}
+          />
+      </div>
+    );
+  }
+}
+then lets console.log(this.props) in our Welcome class
+we can add an image to our App class then in our Welcome class
+we can jsut add an <img src=this.props.img />
+
+SLOT MACHINE PROJECT
+make new project
+
+LOOPING IN JSX
+Create a new index.html and js
+create a Friend.js
+in the App class
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+      <Friend
+      name="Greg",
+      hobbies={["music", "video games"]}
+    )
+  }
+}
+
+class Friend extends React.Component {
+  render() {
+    const {name, hobbies } = this.props;
+    return (
+      <div>
+        <h1>{name}</h1>
+        <ul>
+          {hobbies.map(h => <li>h</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
+this will just print h, what do we need to do to fix this? {h}
+we can refactor this to also be 
+
+class Friend extends React.Component {
+  render() {
+    const {name, hobbies } = this.props;
+    const list = hobbies.map(h => <li>h</li>)
+    return (
+      <div>
+        <h1>{name}</h1>
+        <ul>
+          {list}
+        </ul>
+      </div>
+    )
+  }
+}
+currently we are just using a <li> but its more common to have an actual class in there
+try adding another friend
+
+DEFAULT VAULES FOR PROPS
+Components can specify default values for missing props
+remove props from welcome and run code, gives us undefiend
+
+Lets try adding default props to our Welcome function
+
+last Welcome extends React.Component {
+  static defaultProps = {
+    from: 'James'
+  }
+  render() {
+    return <h1>welcome{this.props.to} to beachcoders from {this.props.from}"<h1>
+  }
+}
+then lets add a "to" default props
+
+STYLEING IN REACT
+lets revist our slot machine
+create a new css file and link it to our html
+<link rel="stylesheet" href="app.css"/>
+it's standard to convention to name the class after what you are styling
+but its not required
+.Machine{
+  2px solid black;
+  background: green
+}
+ try setting div to have a class="Machine"
+ it looks like it worked but open up the console
+ error
+
+class Machine extends React.Component {
+  render() {
+    const { spin1, spin2, spin3 } = this.props;
+    const isWinner = spin1 === spin2 && spin2 === spin3;
+    return (
+      <div>
+        <p>{spin1} {spin2} {spin3} <p>
+        <p>{isWinner ? "Winner!" : "Loser"}</p>
+      </div>
+    );
+  }
+}
+This is because class is a already a keyword in JS so using class to mean html class would confuse babble
+we get the same error with for because we for is a reserved keyword for loops so we use HTMLfor like in a <label>
+
+up until now we were tought using inline styles is bad and evil but we do sometimes see/use inline styles in react, beacuse it is all transpiled togeather
+<p style={{fontSize: '50px', backgroundColor: 'green'}}>{spin1} {spin2} {spin3} <p>
+notice we use cammelCase and not kabab-cased
+what we can also do is save it to a var
+const styles = { fontSize: '50px', backgroundColor: 'green'};
+then just pass in the var 
+<p style={styles}>{spin1} {spin2} {spin3} <p>
+
+we can also change the class depending on what is being shown, such as winner in gold, loser in black
+
+lets make a css class called Machine-winner, Machine-loser .Machine-winner{color: green; background: white;} .Machine-loser{color: white; background:red}
+<p className={isWinner ? Machine-winner: Machine-loser}>
+  {isWinner ? "Winner!" : "Loser"}
+</p>
+
+CREATE-REACT-APP!
+we are going to level up our tools to a more industry standard
+we could just continue to link react to our index.html file
+build our components and import them into our App.js
+and that does work ok but a tool was developed to for react users
+Create-React-App(CRA) is a utility script that
+create a skeleton project for us with all the basics included
+this lets us take a more modern approach and gives us some features to use for free
+makes testing and deployement easier
+it is an offical thing and does have its own docs
+search CRA docs, it is an actual thing not some random 3rd party app
+CRA is great for middle of the road developers, starting u build from scratch and when ur really advanced you might also build from scratch
+
+lets install CRA
+to install CRA we need node.js lets check and see if we have that installed node -v, npm -v npx -v
+the easiet way is with an npx install npx create-react-app my-app
+for npx you need to have npm 5.2+ or higher
+if npm is not uptodate plz update. otherwise you need to npm install -g
+
+so we run with the terminal command npx create-react-app "foldername"
+warnings: you dont want to run this inside another react app. 
+It will create the folder whereever we are in the terminal
+make sure it is somwhere we are ok with creating a big folder
+I heard quit and reopen terminal after running
+npx-create-react-app my-first-app
+
+it will take few minutes to install all the depenencies and the dependencies they depend on.
+in total around 1991 packages are installed for us
+now lets open up the webaap we created and take a look around
+since its a webapp we want to always be opening folders not just individual files
+
+lets look at the readme to start.  these are all npm scripts we can run in terminal with command line
+now lets look in the node.modules folder, what node modubles is, is all of our dependencies that were installed for us.
+this folder is something we ourselves dont mess with but we can see how much was installed
+
+lets look in the public folder.  Not much in there but we do see an index.html file in there.
+that file gives us our basic boiler plate and acts as the starting point for or web app
+if we scroll through that file we see it does have a <div class='root'></div>
+we as devs usually dont mess with the public file,  sometimes we do but not very common
+
+now lets open the src folder and we can see there is an app.js and index.js folder in there
+the src is where we as devs spend most of our time working.
+
+lets look at the .gitignore.  When we are uploading our projects to github we dont want to upload tonnage, so all the dependencies are ignored
+
+we have a package.json folder where we add our own dependencies later, down the line. such as axios, bootstrap or semantic ui
