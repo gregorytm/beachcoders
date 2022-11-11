@@ -1,0 +1,50 @@
+set up html file.
+set up css file
+.container-1 div{
+  border:1px #cc solid;
+  padding10px
+}
+
+.container01{
+  display: flex;
+}
+.box-1{
+  flex:1;
+}
+.box-2{
+  flex:1
+}
+.box-3{
+  flex:1
+}
+try changing one box to flex-2,flex-3, others
+give .box-1{order:2}.box-2{order:1}.box-3{order:3}
+give container-1{alight-items:flex-start} try flex-end, center
+add to .container-1{flex-direction:column;}
+
+add container-2 with <divs class="container-2-box">to html num 4-6
+.container-2-box{width: 27%} change it to {flex-basis:27%}
+.container-2{display:flex}
+give container-2 .justify-content:flex-end; try flex-start, center, space-between, space-around;
+
+using console in the browser resize the screen to tablet and smartsphone, the columns stay but thats too big.
+so if we make an @media(min-width:768px){
+  and past container-1 and 2 in here
+}
+it will resize once it hits 768
+
+now lets get objects to wrap
+ in the html make container-3 with <div class="container-3-box"> num 7-12
+ now lets add them to the boarder and padding class 
+
+ create class .container-3-box{
+  flex-basis:15%;
+ }
+ create class .container-3 {
+  display:flex;
+  flex-wrap:wrap;
+ }
+ make this outside the media query
+
+ add to container-3: {justify-content:space-between;}
+ 
