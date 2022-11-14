@@ -1,0 +1,165 @@
+How to start up a server, very easy
+npm start in the correct folder in terminal
+if you want to stop it at any point, control+c in concole will stop the server
+CRA is built using something called webpack
+learning webpack from scratch can take a lot of work so this simplifies our life.
+what does webpack do?
+enables module importing and exporting
+compacks all our css files into one file for the browser
+this reduces the number of https requests the server makes thus increasing preformance
+hot reloading, so when we change a source file the browser will automaticlly reload
+easy testing and deploment  
+main takeaway, webpack is a powerful tool people use on its own but its not very beginner friendly
+CRA lets us use webpack without needing to spend time learning how to set it up
+
+now lets make changes to one of our files
+lets make some changes to the app.js file
+lets look at the app.js file, there is css classes being used, p tags, stuff we are familiar with.
+lets change the txt in the <p> tag to say something else "my first CRA edit!"
+notice it automaticlly reloads 
+lets now change the app.css app-header background-color
+basic stuff
+
+now lets talking about 2015 modules
+if we look at our current import stuff there is a few different things going on, some are strings, some are are strings with ./ then we have default imports and stuff
+lets start by deleting everything in our src folder, if we look in the browser it is freeking out because it can not find the index.js file
+so lets start by creating our index.js file and a 2nd file called helpers.js
+lets create a function in our helpers folder function greet(){'welcome to beachcoders'}
+now we want to use it inside of index.  if we try to call greet in index.js the console will give us an error, greet is not defined
+to use greet in index.js we need to do 2 things, export greet in helpers and import greet into index.js
+at the bottom of helpers lets put export default greet.  we dont want to use () here beacuse that would call the function
+now in index.js we can import the file. In index.js at the top of the file put import greet from 'helpers'
+look at browser console and see we get an error, helpers not found.
+this is becaue we just have the string "helpers" in our import, what that does is it tells react to look in the node folder for helpers
+if we change "helpers" to "./helpers" it tells js to look in the current folder for helpers.js file, we dont need to put .js but if its any other file type we do need to put .something(.css, .py, .html)
+now if we check our browser it should give us the greet function
+things like react and react.dom do not require ./ because those are folders and files in the modules
+we can change the name greet in our import to be anyting, we could change it to be import g from "./helpers"
+now lets add two new functions into our helpers file function hangry(){console.log("i hangry")} function hangry2(){console.log("i hangry again")}
+currently we can not use them in index because we are not exporting them with export default.
+what export default does is it exports one thing from the file, lets comment out export default and below it put export {greet, hangry, hangry2}
+then in our import we need to add curly braces to our import.  import {greet} from "./helpers"
+note that the name does matter here when we are not using export default if we change it to import {g} from "./helpers we get an error
+now lets import our other 2 functions
+What if we want to keep our default export in helpers in addition to our other 2 exports
+the synatx would look like: 
+export default helpers;
+export default {hangry, hangry2}
+try running this in console, we  get error
+to fix, in index we would do:
+import greet, {hangry, hangry2} from "./helpers";
+when we start writing our compoents we will use import React, { Component } from 'react on each component page
+big things to remember away from this is we need to export and inport our component
+ we use export default if there is one explicit thing in that file so there is no confusion amongst devs
+ we use "./" to get a file we created, when its a module we have installed we just use a string
+
+ Quick Exercise:
+ comment out everything we have done in index.js and helpers.js
+create a new folder in src called fruits.js have this file export an array of fruits ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇",",🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥","🥝","🍅","🍆","🥑"]
+then in helpers.js export two functions: 
+choice(items) randomly select an item from an array and returns it.  
+remove(items, item)  if item is found, removes and return item.  Otherwise returns undefined
+then in index.js import fruits and both helper functions
+have index select a ranedom fruit from array, 
+log a message "i'm hangry for a RETURNED FRUIT please"
+log the mesage "here you go"
+log the message "still hangry can I have another"
+remove the fruit from the list of arrays,
+log the message "sorry we ran out, we have num of fruits left
+
+lets use CRA to make an app called test.js
+CRA and Componenet styles and standards
+Each React component goes into a separate file
+src/Fruits.js for fruits
+src/Dashboard.js for dashboard
+the name of the file should always match the component in that file
+at the top of every react coponent file we create will have 
+import React, { Component } from 'react';
+
+class App extends Component {
+
+}
+top level component is usually called App, you can change it but CRA is set up to look for App so lets keep it app
+
+Assets and css in CRA
+the standard is to make your css file the same name as ur componnet file
+Fruits.css for fruits component MainTable.css for MainTable component
+then you just need to import the css file into the compoent and react handles the rest
+usually its set it up like this
+<div className = "Fruits">
+  <p className="Fruits-title">{ this.props.title }</p>
+  <p className="Fruits-portrate>{ this.props.portrate}</p>
+</div>
+
+in our new react app lets create a new component
+Dog.js
+import React, { Component } from 'react';
+class Dog extends Component {
+  render() {
+    return (
+      <div>
+        <h1>DOG!</h1>
+      <div>
+    );
+  }
+}
+export default Dog
+then lets delete everyitng in the App return <div>.  
+Import Dog component then render dog
+now lets create a css file Dog.css
+.Dog color: green; then import css it into our Dog.js
+now lets do an example of what not to do in react
+in our Dog.css lets make a new class selecting all divs
+div{
+  background:blue;
+}
+then add in our App component another <div>Outside our dog component</div>
+we see it applies our dog color to that div, unwanted result
+so what we write does not only apply to that file so thats why we use this css anme method
+now lets talk amout images
+we store those in our src folder with the components, we can make a subfolder for images and css in there
+
+import dog from "./dog.jpg";
+
+  render() {
+    return (
+      <div>
+        <h1>DOG!</h1>
+        <div>
+          <img src={dog} alt="my dog"
+        <div>
+      <div>
+    );
+  }
+}
+now if we wanted to style the image we would not just select all images in our css
+we would give it a className="Dog-image"
+hen select it in css with Dog-image{
+  width 200px;
+}
+when i make a new componet file i ususally create the css at the same time so the top of my compoent will
+import React, { Componet } = "react"
+import "Dog.css"
+
+now lets start building our pokidex, discalmer i took this from another web dev teacher i just thought it was a good example
+There will be three components, the app, this should jsut render the pokedex, the top level ususally does not have a bunch of functionally
+then there will be a pokecard that displays the pokemon data.
+pokedex, that has an array of objects, all our data.
+
+[
+  {id: 4, name: 'Charmander', type: 'fire', base_experience: 62},
+  {id: 7, name: 'Squirtle', type: 'water', base_experience: 63},
+  {id: 11, name: 'Metapod', type: 'bug', base_experience: 72},
+  {id: 12, name: 'Butterfree', type: 'flying', base_experience: 178},
+  {id: 25, name: 'Pikachu', type: 'electric', base_experience: 112},
+  {id: 39, name: 'Jigglypuff', type: 'normal', base_experience: 95},
+  {id: 94, name: 'Gengar', type: 'poison', base_experience: 225},
+  {id: 133, name: 'Eevee', type: 'normal', base_experience: 65}
+]
+the way we are going to get our images is through a url and the id
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png.
+
+now we generally have two places to start building our app, the top down or the components up for me im ging to build a single card, then work up
+first lets remove almost everything in our App.js in between our return divs
+lets remove all imports except reaat and our css, we will edit the css later
+now lets create a our single smalled component.  Pokecard.js
