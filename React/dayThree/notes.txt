@@ -157,7 +157,7 @@ pokedex, that has an array of objects, all our data.
   {id: 133, name: 'Eevee', type: 'normal', base_experience: 65}
 ]
 the way we are going to get our images is through a url and the id
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png.
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png
 
 now we generally have two places to start building our app, the top down or the components up for me im ging to build a single card, then work up
 first lets remove almost everything in our App.js in between our return divs
