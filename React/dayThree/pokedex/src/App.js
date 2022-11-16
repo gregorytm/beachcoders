@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Pokedex from "./Pokedex";
+import Pokegame from "./Pokegame";
+// import Pokedex from "./Pokedex";
 // import Pokecard from "./Pokecard";
 import "./App.css";
 
@@ -7,7 +8,8 @@ function App() {
   return (
     <div className="App">
       {/* <Pokecard id={4} name="Squirtle" type="water" exp={63} /> */}
-      <Pokedex />
+      {/* <Pokedex /> */}
+      <Pokegame />
     </div>
   );
 }

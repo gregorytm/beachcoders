@@ -1,0 +1,246 @@
+REACT STATE INTRO
+what is state, not just in react but in all web apps?
+learn how to model and initalize state in react
+using events to trigger state changes
+
+but first we are going to install react developer tools
+install react deveoper tools plugin for browser
+once installed lets mess around with it in our pokeapp
+
+What is State?(internal data specific to a component)
+steppping away from react for a moment, any advanced web app is going to have some form of state to keep track of changing data
+logged in users will see something different then logged out users.
+if you edit your profile and a popup window appears
+read more, show more buttons is controlled by state
+The state happening in the client side(renderd in the browser) does not always effect the backend state
+the backend might not care if you have a popup window open
+
+State is designed to be able to change in response to user events.
+chess.com example the peaces move, that is changing state.
+
+There are two types of state in the front end we need to keep track of
+UI logic - is the colapasable menue open or closed.
+Business logic - do i have read or unread emails, how is read or unread emails shown to me
+pre react, we would use a tool called jQuery, it was not great
+super fast react concept review
+what is a componenet?  basic building block of react, combines vanilla js with transpiled jsx.
+what is a prop?  info we pass down to components.  Porps are immutatble, we can not change props in a component
+what is state?  internal data specific to a component, data that can change with user interaction (props are immutatble, state changes over time)
+
+now lets right some code
+first step in using state, create a default value for state, usually done right when the component is created.
+to do that we use a constructor function, NEW SYNTAX
+if you dont need state you dont use the constructor syntax
+
+create new create-react-app
+in our src folder lets create Game.js
+
+Game.js
+import React { Component } from "react";
+class Game extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      score:0,
+      gameOver: false
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>Your Score is: {this.state.score}</h1>
+      <div>
+    )
+  }
+}
+export default Game;
+in our App.js lets import and render Game.
+run app and inspect what we see using dev tools.
+now comment out this.state and look at the error message state is null
+now change {this.state.score} to be {this.props.score} no error.
+
+New Syntax(just exposure)
+create Game2.js and render it in app.js
+import React { Component } from "react";
+class Game extends Component {
+    state = {
+      score:0,
+      gameOver: false
+    }
+  render() {
+    return (
+      <div>
+        <h1>Your Score is: {this.state.score}</h1>
+      <div>
+    )
+  }
+}
+The reason we are not learning this syntax is because state in game2 is not valid js. it is create react app doing that for use
+currently the only non js we are writing is in our return statement but if we use teh state method like above it can get confusing.
+https://babeljs.io/docs/en/babel-plugin-proposal-class-properties
+
+lets talk about our constructor function
+if your componenet is stateless, you can not include your constructor fuction, like in our poke game
+if you are building a component taht uses state you need a standard react constructor with the arguments props
+you need to then call super(props) at the start of the constructor, this lists your class as a react component
+once we do this we can refer to this.state like we have been doing for this.props
+
+lets talk about the first line of code we have been writing 
+class Game extends Component {
+if we left off "extends Component" part we would just be creating a "normal" js class and we would not get any of the react stuff
+super(props) lets us access the props while using state.
+
+now lets talk about chanaging state
+so far we have seen how to declare an inital state in our Game.js component
+you would thinkwe can just change state like we would a var.
+class Game extends Component {
+    state = {
+      score:0,
+      gameOver: false
+    }
+    this.state.score=0;
+  render() {...
+  but we never want to set state this way, very bad. even if the component, or our app runs ok it we are breaking react behind teh scenes.
+  over time or big app can lead to big issues also we never want to call this.state in the constructor(why would you ever?)
+
+to properly set sate we use this.setState({playerName: "Michael", score:10}) method.
+what setState does is it will update(patch) the data, eventually.  The text editor is an async reader so we need to work within those terms.
+lets look at setState() in react docs, we see there is a lot of different ways we can use setState function, objects
+
+lets make a new react component RanNum.js
+import React, { Component } from 'react';
+
+class Rando extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { num: 0 };
+  }
+  render() {
+    return <h1>{this.state.num}</h1>;
+  }
+}
+
+export default RannNum;
+then in our app.js lets import and render our RandNum componenet
+check our browser, we should see 0
+now lets pass a prop into <RanNum maxNum = {10} />
+now in our RanNum componenet we are going to write some logic to pick a number between 1 and our maxNum
+class Rando extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { num: 0 };
+  }
+  makeTimer(){
+    setInterval(() =>{
+      let newNum = Math.floor(Math.random() * this.props.maxNum);
+      this.setState({num: newNum})
+    },1000);
+  }
+  render() {
+    return <h1>{this.state.num}</h1>;
+  }
+}
+then we need to call make timer function.  Currently we only have one way to call funct.  We need to put this.makeTimer() in our constructor
+class Rando extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { num: 0 };
+    this.makeTimer();
+  }...
+  lets run this in our browser.  we see the number is chaning
+  lets open up our react dev tool we see everytime the component changes it gives it a blue box.
+  try putting a console.log("changing") inside our RanNum render{console.log("changing)}
+
+React events
+currently our only real example in updateing state is not really a real world example.
+We are using a time to generate random numbers.
+usually we update state when something happens, the user clicks a button, submits a form, drop and drop files around, click to open a menue
+React gives us a bunch of helpful built in attributes representing every kind of browser event.
+look up react docs for Handling Events.
+
+make a new component called Button.js
+import React, { Component } from 'react';
+
+class Button extends Componenet {
+  render() {
+    return (
+      <button>Click</button>
+    )
+  }
+}
+export default Button; and import and render it to App.js
+then give <button onClicl={function() {
+  alert('Clicked');
+}}>...
+
+lets make a new componenet called BrokenButton
+import React, { Componenet } from 'react;
+
+class BrokenClick extends Component {
+  constructor(props){
+    super(props);
+    this.state= {clicked: false}
+  }
+  handleClick(evt) {
+    this.setState({clicked: true});
+  }
+  render() {
+    return(
+      <div>
+      <h1>{this.state.clicked? 'Clicked!`: 'Not Clicked`}</h1>
+        <button onClick={handleClick}>Click Me!</button>
+      </div>
+    )
+  }
+}
+export and import/render
+then we need to call the function. just temparary lets put this.handleClick in our constructor function
+lass BrokenClick extends Component {
+  constructor(props){
+    super(props);
+    this.state= {clicked: false}
+  }
+  then we need to add "this" to our <button onClick button = {this.handleClick()}...
+and run but we still get an error. why? this is undefined?
+who is calling handleClick for us?  React is on click event, what is it calling it on, react does not know, it loses it's contetext of what this it is working with.
+so how do we fix it?
+we need to use .bind()
+so how we fix brokeClick is we add in on constructer
+this.handleClick = this.handleClick.bind(this);
+click button and it should change the display
+
+look up react docs how do I bind a function to a componenet instance
+a few different stratigies are listed => does not rebind the keyword this.
+
+lets make a new componenet called counter
+import React, { Counter } from react;
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { num: 1};
+    this.ranNum = this.ranNum.bind(this);
+  }
+  ranNum(){
+    let rand = Math.floor(Math.random() *10)+1
+    this.setState({num: rand})
+  }
+  render () {
+    return (
+      <div>
+        <h1>Counter is at: {this.state.num}</h1>
+        {this.state.num === 7 && <h2>Winner</h2>}
+        {this.state.num !== 7 && <button onClick={this.ranNum}>Random Number </number>}
+        //we can rewrite abouve 2 lines as just one turnerary
+        {this.state.num ===7 ? <h2>Winner!</h2> : <button onClick={this.ranNum}>Random Number </number>}
+      </div>
+    )
+  }
+}
+export class import into App.js
+
+State as Componenets
+states and props are some of the biggest parts of React.
+lets now talk about states as props.
+currently we have been using states and props togeather
+it is more more common to have one parent Componenet that passes down its state values as props to a "dumb" child components
