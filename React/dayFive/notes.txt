@@ -1,0 +1,178 @@
+UPDATING EXISTING STATE
+learn how to update state based off an existing state
+properly manage state updates for data structures
+best practices for modeling state and designing components
+
+lets create a new create-react-app more-on-state
+create a new componenet called ScoreKeeper.js
+
+import React, {Componenet } from 'react';
+
+class ScoreKeeper extends Component {
+  constructor(props) {
+    super(props);
+    this.state={ score: 0 };
+  }
+
+  render(){
+    return(
+      <div>
+        <h1>Score is: {this.state.score}</div>
+        <button onClick={this.singlePoint}>Single Point</button>
+      </div>
+    );
+  }
+}
+
+export default ScoreKeeper;
+
+then lets bind our this statement 
+this.singlePoint=this.singleKill.bind(this);
+
+then lets create singlePoint logic
+singlePoint(){
+  this.setState({score: this.state.score + 1});
+}
+
+this does work but is a bad idea and we will deminstrate why
+
+lets add a new button under our first button
+<button conClick={this.tripplePoints}>Tripple Points</button>
+then we need to bind keyword this up top
+this.tripplePoints = this.tripplePoints.bind(this);
+then define tripplePoints under singlePoint
+tripplePoints(){
+  this.setState({score: this.state.score + 1});
+  this.setState({score: this.state.score + 1});
+  this.setState({score: this.state.score + 1});
+}
+
+obviously we could just do +3 but lets do it this way to illistrate an example
+but if we try out our button, the tripplePoints button does not work the way we expect it to
+this had to do with how setState works, it will assume the last item in tripplePoints is the most current state
+
+lets do it the correct way, lets start my commenting out or deleting the way we just set it up
+
+trippleKill(){
+  this.setState(st => {return {score: st.score+1}
+  });
+  this.setState(st => {
+    return { score: st.score +1}
+  });
+    this.setState(st => {
+    return { score: st.score +1}
+  });
+}
+now when we run tripplePoints it will not be batched togeather or have any issue finding the current state 
+
+now that we understand how this.setState() we can use a more advanced pattern called functional setState.
+lets comment our current tripplePoints and we will refactor it into something else
+
+incrementScore(curentState){
+  return {this.currentState.score+1}
+}
+tripplePoints(){
+  this.setState(this.incrementScore)
+  this.setState(this.incrementScore)
+  this.setState(this.incrementScore)
+}
+
+now we will do the emojiList example
+look to emojiList example
+
+What is the difference between state and prop
+in react we want to pass as little data in state as possible
+does "this thing" change, if no, then it should be passed down as a prop.
+so if we were modeling a person, things like first name, last name, birtday, age
+these things would probably not change that much so we would not want to store those in state
+instead we would pass them down as props
+
+more rules on designing state
+state should live on the parent
+as we talked about earlier there should be a downward flow of data.
+parent elements should be the more stateful componenet and they pass down data as props to the child elements
+when we think about it, a parent element grabs statefull data then renders dumb(child) elements
+we centralize our state in parent component then it generates needed componenets from that.
+sometimes we may have state in child componenets but very rare.
+if we loggle a viewport or visability we might have state in a child
+
+lets make a lotto app 6 random numbers with a generate button and then maybe a mini lotto with only 4 numbers
+thinking it through knowing state needs to be centralized the only thing we need to pass down in state is an array of lotto numbers
+props would be stuff like title, numBalls and maxNum, the data that rarly changes
+
+Event Handlers in React
+onClick, onMouseOver, onSubmit, onKeydown ect.
+go to react docs and look up event handlers
+build RickBox, use onMouseEnter, try onMouseLeave
+
+build AnnoyingForm
+
+Method Binding
+so far our method bindings have not used the keyword this
+lets go back to our RickBox componenet and pass our messages array as default props
+static defaultProps={
+  messages = [copy/past messages
+    ...
+  ]
+}
+then remove the const messages=[messsages] part in dispense wisdom and change it to
+this.props.messages
+but the way we have it now we would need to change all messages to be this.messages
+so a shortcut we can get around doing that is if change 
+this.props.messages
+to be
+let {messages} = this.props.messages;
+try it out and we get an error...
+to debug the error we can do a console.log
+dispenseWisdom(){
+  console.log('THIS SUXS', this)
+} 
+this means we are losing our value of this.
+there are three common ways we can fix this.
+1. use bind inline
+2. use an arrow functional
+3. Method bind in the constructor
+
+inline(binding inside the function)
+<div> className='RickBox"
+  onMouseEnter={this.dispenseWisdom.bind(this)} .
+  {...}
+<div>
+pros to binding "this" this way
+  very explicit, easy to read and understand
+cons
+  if we have multiple componenets we need to bind it multiple times
+  clutters oure markup
+  this method creates a new function every time "this" is bound
+    that means from a preformance perspective it is not as efficient
+    on smaller apps like ours its soo small you wont even notice it
+    but if ur getting paid to work on a massivly big app it will have an inpact
+
+the 2nd option is we can use an arrow function
+render() {
+  return(
+    <div className='RickBox> onMouseEnter={() => this.dispenseWisdom()}>
+    ...
+  )
+}
+props to arrow func method:
+  no useing the keyword bind
+cons:
+  more abstraction
+  same drawbacks of inline like with inline(mult componenets, binding inside the render)
+
+3rd option is putting it in the constructor, like we have been doing
+its kind of big and chunky but its easy to understand and we are not creating functions inside the render method
+
+class RickBox extends Component{
+  constructor(props){
+    super(props);
+    this.dispenseWisdom=this.dispenseWisdom.bind(this)
+  }
+}
+render() {
+  return(
+    <div className='RickBox> onMouseEnter={this.dispenseWisdom}>
+    ...
+  )
+}
