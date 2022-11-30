@@ -1,0 +1,107 @@
+refactor RickBox to v3
+i will be using the explicit bind method but you might see the arrow func the other way
+
+button project
+
+now lets talk about passing functions down to child componenets
+very common in refactor
+children are not stateful, but need to tell parents when to change state
+How do we send data back up to parent component?
+
+React Data Flows
+A parent component defines a function
+the function is passed as a prop to a child component
+the child componenet invokes the prop
+the parent function is called, usually setting new state
+The parent component is re-rendering along with its children
+
+lets build NumberList
+lets make NumberListV2
+
+where to bind
+The higher the better - if child components dont need it, dont bind it there.
+If you need a parameter, pass it down to the child as a prop, then bind in the part and child
+Avoid inline arrow functions/binding if possible
+NO need to bind in the constructor and make an inline function
+if you get stuck dont worry about performance, just get it working
+
+Naming Conventions
+this is not required its just good convetion
+action/handleAction
+in parent give function a name that relates to behavior(remove, add, open, toggle)
+in child you would then match the parent name (handleRemove, handleAdd,handleOpen,handleToggle)
+
+List&Keys
+any time we map over and list componenets we have gotten an no unique key error
+add the key={n} to NumberListV2 the error goes away
+this does not cause an error when we have unique values but lets change our NumberListV2 to have repeat numbers and remove the key={n} try deleting stuff
+then reinsert key={n}, notice we get a new error.  Try deleting things now, different behavior
+so the lesson is we need to have unique keys, even if the data is the same
+usually we want to create unique ids for each componenet but that would require some refactoring in our code
+we do have one option to create a unique ids if we cant refactor a ton of code
+in our NumberListV2
+  render() {
+    // Key must be unique!
+    let nums = this.state.nums.map((n, idx) => (
+      <BetterNumberItem key={idx} value={n} remove={this.remove} />
+    ));
+    return (
+      <div>
+        <h1>Better Number List</h1>
+        <ul>{nums}</ul>
+      </div>
+    );
+  }
+
+  this works only if our data is not going to chage and its not alwasy the best option
+  web search "index as a key is an anti-pattern"
+  there are a bunch of small libraries, a popular one is uuid, look it up on mdn
+
+  React Forms
+  Build forms with React
+  Understand what controlled componenets are
+
+HTML form elements works differently than otoher Dom elemenets in React
+Forms can have some internal state built into them
+in pojs javaScript does not know whats in the form until we press submit
+this applys for <input>,<textarea>, and <select>
+In react we have our state component that handles our state(big part of react)
+react controls what is shown in the input and what happens when the user actually types in input.
+the markup will be very long but we will refactor to shorten it up
+
+create Form component
+open up react dev tools in console and see that state is being updated every time we type a key
+
+now lets create a form with multiple inputs FormV2.js
+as you can see in our form component is getting really big fast, fortunatly there is another way
+look up computed property names we can use this to update or onchange handler so it is reusuable
+update to FormV3
+
+Note if we make a label tag using for we get an error
+    return (
+      <div>
+        <h1>Form Demo</h1>
+        <form onsubmit={this.handleSubmit}>
+        <label for'username></label>
+          <input
+            type="text"
+            id="username"
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+          <button>submit</button>
+        </form>
+      </div>
+    );
+this error is because for is a reserved keyword in js
+so we need to use htmlfor='username'
+
+make ShoppingList component
+
+after we build out shopping list notice we are still getting our key error
+lets install UUID to make our keys handleRemove
+in terminal, in our react app lets run npm install uuid
+then in shopping list import our new library
+
+lets make a new react app
+create box app
