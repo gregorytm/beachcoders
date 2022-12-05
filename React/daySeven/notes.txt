@@ -1,0 +1,15 @@
+make newboxForm
+
+make todo app
+
+Lifecycle componenets and mouting/unmounting
+every component comes with methods that allow developeprs to update state and reflect the changes to the UI before/after key react events
+mounting/updating/unmounting
+
+when creating a componenet react calls constructer, react then calls render() that tells react waht to put on the page
+google mounting/updating/unmounting look for the image, walk thought the lifecycle of a componenet
+look up componenetDIdMount() in react docs
+
+do timer example
+
+do playing card example
