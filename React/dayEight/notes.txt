@@ -1,0 +1,35 @@
+ROUTER
+there are two different forms of routing, client side roting and server side routing
+go to a specific movie or feature page on imdb or mdn, notice the url has an id in it
+there is a request to the server, the server finds that html page and sends it back to the client
+
+now we have client side routing where we can display selective info without ever leaving the page.
+Think of it like a play where people move sets in and out.
+
+lets look back at our previous react app.js files where we have multiple componenets being renderd in.
+All the componenets are renderd in at once
+
+Introduce React-router
+not offically part of react, there used to be others
+
+to install it we need to npm install react-router-dom
+can use npm install --save react-router-dom
+import it into index.js
+then import it into app.js
+import {Route} from "react-router-dom;
+in ur app.js method in the return div do:
+<Route path="/todo componenet{Todo} />
+then build that out for all ur componenets,
+build an about page and set it to /
+<Route path="/" componenet{About} />
+the issue we get is when we navigate to a new component route we dont lose the first componenet
+introduce Switch
+import {Router, Switch } from "react-router-dom";
+then wrap all our <Route /> tags in a <Switch />
+this gives us a new problem in that our about route "/" is matching up with all the routes
+we can fix this by putting the "/" route at the very end
+however this is kinda oldschool, annyoing to do.  so we get the keyword exact match
+<Route exact path="/" componenet{About} />
+
+now lets talk about building a nav using a <Link> tag
+now lets talk about <NavLinks>
