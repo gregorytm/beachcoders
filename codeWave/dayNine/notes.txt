@@ -1,0 +1,164 @@
+lets revist map, filter, reduce
+what is map?
+creates a new array with the results of calling a callback on every element in the array
+
+const text = ['rofl', 'lol', 'omg', 'ttyl'];
+const caps = text.map(funnction (t) {
+  return t.toUpperCase();
+})
+
+numbers = [20,21,22,23,24,25,26,27];
+const words = ['asap','byob','rsvp','diy'];
+
+const doMath=numbers.map(function (num) {
+  return num *2;
+})
+
+const details = numbers.map(function(n){
+  return {
+    value:n,
+    isEven: n%2 === 0
+  }
+})
+
+const doubles2 = [];
+for(let num of numbers) {
+  doubles2.push(num * 2)
+}
+
+with something simple like *2 it is just as easy to use the doubles2 approach
+but as we build bigger and bigger things using map (doubles) is much easier
+
+const usingWords = words.map(function(word){
+  return word.toUpperCase().split('').join('.')
+});
+
+const movies = [{
+  title: 'alien',
+  writers:['ridly scott', 'other guy'],
+  rating:4.5
+},
+{
+   title: 'super troopers',
+  writers:['broken lizareds', 'other person'],
+  rating:3.5
+},
+{
+   title: 'star wars',
+  writers:['george lucas', 'other person1'],
+  rating:2.5
+},
+{
+   title: 'violent night',
+  writers:['hollywood guy', 'other peps'],
+  rating:2.5
+},
+]
+
+const movieTitles = books.map(function(m) {
+  return m.title
+})
+
+lets talk about arrow functions
+more compact alternative to a regular functions;
+
+const square = function(x){
+  return x * x
+}
+
+const square = (x) => {
+  return x*x;
+}
+
+const sum = function(x,y){
+  return x + y;
+}
+
+const sum = (x,y) => {
+  return x + y;
+}
+
+const isEven = (num) => {
+  return num % 2 === 0;
+}
+
+const multiplay = (x,y) => {
+  return x * y;
+}
+
+if we only have one param, we can leave the () off
+
+const isEven = num => {
+  return num 5 2 === 0;
+}
+if we dont have a param we just need an empty ()
+const greet = () =>{
+  console.log("Hi!");
+}
+
+we can make some arrow functions even smaller
+if an arrow has a single return (Implicit return) then we can write it in one line without teturn
+
+const isEven = function (num) {
+  return num % 2 === 0;
+}
+const isEven = (num) => {
+  return num % 2 === 0;
+}
+const isEven = num => (
+  return num %2 === 0;
+);
+const isEven = num => num % 2 === 0;
+
+const square = n => {
+  return n * n;
+}
+
+const square = n => (
+  n * n
+)
+
+const square = n => n * n;
+
+if ( n < 0) {
+  return false
+}
+
+const nums = [1,2,3,4,5,6,7,8];
+
+const doubles1 = nums.map( function (n){
+  return n*2;
+});
+
+const doubles2 = nums.map(n => {
+  return n * 2;
+})
+
+const doubles3 = nums.map(n => n*3);
+
+it also does not reasign the keyword "this"
+
+
+array.Find
+
+const movie = movies.find(movie => {
+  return movie.includes('star')
+})
+
+const movie2 = movie.find(m => (
+  m.indexOf("Mrs") === 0
+))
+
+const movie2 = movies.find(m => indexOf("Mrs") === 0)
+
+const goodMovie = movies.find m => m.rating >= 4.3)
+const lucasMovie = books.find(m => (
+  m.authors.includes('george lucas')
+))
+
+const nums = [34,44,54,67,12,92,57]
+
+const odds = nums.filter(n => n % 2 === 1)
+const evens = nums.filter(n => n % 2 === 0)
+
+
