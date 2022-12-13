@@ -1,4 +1,4 @@
-lets revist map, filter, reduce
+lets revist map, filter, reduce and others
 what is map?
 creates a new array with the results of calling a callback on every element in the array
 
@@ -162,3 +162,173 @@ const odds = nums.filter(n => n % 2 === 1)
 const evens = nums.filter(n => n % 2 === 0)
 
 
+lets talk about sort.
+
+const prices = [123.55,3000,86.99,39.99,12.00,1800]
+if we just call
+const newArry=prices.sort() it will sort by its uni code.
+but if we pass in a callback then we can get it to sort the way we want it to
+const ascSort = prices.sort((a,b) => a - b);
+const descSort = price.sort((a,b) => b - a;
+thing to note is that sort is one of the few array methods that mutate the array
+if we look at our two arrays it shows the same order because its all refrencing the same array in memory
+so if we wanted to make a new array for each we would have to use a method like .slice()
+const ascSort = prices.slice().sort((a,b) => a - b);
+const descSort = price.slice().sort((a,b) => b - a;
+const newArry=prices.slice().sort()
+
+lets go back to our movies array and sort it 
+in movies we are working with objs.
+movies.sort((a,b) =>a.rating - b.rating)
+movies.sort((a,b) =>b.rating - a.rating)
+
+Reduce uh oh!
+reduce is very useful but it can be difficult to explain
+reudce takes an array of values and makes them down to a single element
+adding a bunch of numbers togeather is the first example we will do but we can do a lot with it
+look up reduce on mdn and talk about the keywords
+accumulator acts as our total number and currentvalue is the current num we are on
+[3,5,6,11,15].reduce((accumulator, currentValue) ->{
+  return accumulator+currentValue
+});
+
+const nums = [7,8,9,10];
+const example1 = nums.reduce((total, currentVal) =>{
+  return total * currentVal;
+})
+
+these are simple examples
+what if we want to find the max value in an array
+const grades =[100,50,67,99,15,105]
+const maxGrade = grades.reduce((max, currentVal) => {
+  if(currentVal > max) return currentVal
+  return max;
+})
+
+const maxGrade = grades.reduce((max, currentVal) => {
+  return Math.max(max, currentVal)
+})
+
+const minGrade = grades.reduce((min, currentVal) => {
+  return Math.min(max, currentVal)
+})
+
+const minGrade = grades.reduce((min, currentVal) => (
+  Math.min(min, currentVal)
+));
+
+const maxGrade = grades.reduce((max, currentVal) => {
+  return Math.max(max, currentVal)
+}, 60)
+
+const votes = ['y','n','y','y','n','n','y','n','n','y','y','n','n','y','n','n','y'];
+const results = votes.reduce((tally, val) => {
+  if(tally[val]) {
+    tally[val]++;
+    } else {
+      tally[val]=1;
+    }
+  return tally;
+},{})
+
+const results = votes.reduce((tally, val) => {
+  tally[val] = (tally[val] || 0) +1;
+  return tally;
+},{})
+
+const movieRatings = movies.reduce((movieGroup, movie) => {
+  const key = Math.floor(book.rating);
+  if(!movieGroup[key]) movieGroup[key] = [];
+  movieGroup[key].push(movie)
+  return movieGroup;
+}, {})
+
+Default params
+
+function multiply(x,y){
+  if(typeof y === 'undefined'){
+  y=1
+}  
+return x * y;
+}
+
+function multiply(x,y){
+  y = typeof y === 'undefined' ? 1 : y
+return x * y;
+}
+
+function multiply(x,y=1){
+  return x * y
+}
+
+const greet = (person, greeting='hi') => {
+  console.log(`${geeting}, ${person}`)
+}
+
+const example1 = (x,y=[1,2,3]) =>{
+  console.log(x,y)
+}
+
+Spread Operator
+look up spread on mdn
+
+Math.max(1,2,3,4,5,6,7);
+this works, what we can't do is pass in a variable
+const nums = =[45,234,765,345];
+Math.max(nums) this gives err
+to fix error we use spread Math.max(...nums)
+
+const exampleFunc(a,b,c,d){
+  console.log('a', a)
+  console.log('b', b)
+  console.log('c', c)
+  console.log('d', d)
+}
+
+const names =['greg','kit,'sven','dog'];
+then we can call exampleFunc like this
+exampleFunc(...names);
+
+const str="greg"
+exampleFunc(...str);
+
+const pets =['dog','cat','skunk','hampster']
+consst dinos = ['ptarridactal','t-rex']
+const names =['greg','kit,'sven','dog'];
+
+const animals = [...pets, ...dinos]
+const animals = ['stegasauras', ...dinos, ...pets]
+similar to .concat method
+we can use it to make a copy of an array
+const newAnimals = [...pets]
+but keep in mind if we had nested arrays and objects it would not make a copy
+we can also use spread to seprate things
+const str="greg"
+const newStr =[...str];
+
+const greg = {
+  familySize:6,
+  perscription: glasses
+};
+const Sammy = {
+  bread:'poodle',
+  color:'black'
+};
+
+const canine = {
+  ...Sammy,
+  goodBoy: true
+}
+
+const person ={
+  ...greg,
+  location: 'CA'
+}
+
+const person2 = {
+  ...greg,
+  familySize: 4
+}
+we can also use spread to create a copy an objects
+but like arrays it will only go one level deep.
+we can not spread an object into an array.
