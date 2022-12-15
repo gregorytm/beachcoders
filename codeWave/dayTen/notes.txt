@@ -1,0 +1,112 @@
+Spread operator
+lets us use a lot of variables
+
+function sum(a,b,c,d,e,f,g){
+ 
+}
+
+sumAll(reset){
+  let total= 0;
+  for(let i =0; i< arguments.length; i++)
+  {
+    total+= arguments[i];
+  }
+  return total;
+}
+not the best way to go about this
+
+function sum(){
+  console.log(arguments)
+}
+try this and pass in sum(1,2,3)
+
+function sum(){
+  return arguemnts.reduce((total, currVal) => {
+    return total + currVal
+  })
+}
+this will give us an error, arguemnts is not a function
+this is because arguemnts is not an array. its array like
+
+so we could fix this with by turning arguments into an array
+
+function sum(){
+  cosnt argsArr = [...arguments]
+  return argsArr.reduce((total, currVal) => {
+    return total + currVal
+  })
+}
+
+function fullName(first, last) {
+  console.log(arguments);
+  console.log(first);
+}
+ fullName('Greg', 'Marsh', 'III', 'King of the rats')
+
+ const multiply = () => {
+  console.log(arguments);
+ }
+ this give an error, arrow functions dont work
+ shortcoming of this approach
+the arguments objects is not a think in arrow functions
+
+so we that we have talked about the arguments object and all its issues
+we can talk about reset
+
+function sum(...nums) {
+  console.log(nums);
+}
+sum(1,2,3,4,5);
+
+function sum(...nums) {
+  return nums.reduce((total, currVall) =>{
+    return total+currVal
+  })
+}
+
+we can also use spread to collect all remaining arguments
+
+function fullName(first, last, ...titles){
+  console.log('first', first)
+  console.log('last', last)
+  console.log('titles', titles)
+}
+u can call titles whatever you want but the spread operator needs to come last in our arguments
+
+const multiply = (..nums) => (
+  nums.reduce((total, currVal) => {
+    return total * currVal
+  })
+)
+
+const multiply = function(..nums)(
+  return nums.reduce(function(total, currVal){
+    return total * currVal
+  })
+)
+
+const multiply =(..nums) => (
+  nums.reduce((total, currVal) => total * currVal)
+
+so the syntax looks the same in both reset vs spread but they do different things
+
+Destructuring
+desturctiong is synatx to unpack values from arrays and properties from objects and putting them into variables
+
+const villans = [
+  'darth vador',
+  'the joker',
+  'scar',
+  'Mystec'
+  'freddy kruger',
+  'bears'
+];
+
+const gold = villlans[0]
+const silver = villlans[1]
+const bronze = villlans[2]
+for a while this was the only way, not very dry
+
+cosnt [gold, silver, bronze] = villans;
+look at these variable in conosle
+
