@@ -1,0 +1,219 @@
+objects and shorthand properties
+
+const reviews =[4.5, 6.2, 8.8, 8.6, 8.5];
+
+//old way
+const getStats = (arr) =>{
+  const max = Math.max(...reviews);
+  const min = Math.min(...reviews);
+  const sum = reviews.reduce((sum, r) => sum + r);
+  const avg = sum/ reviews.length;
+  return {
+    max: max,
+    min: min,
+    sum: sum,
+    avg: avg
+  }
+}
+const stats = getStats(reviews);
+
+//new way
+const getStats = (arr) =>{
+  const max = Math.max(...reviews);
+  const min = Math.min(...reviews);
+  const sum = reviews.reduce((sum, r) => sum + r);
+  const avg = sum/ reviews.length;
+  return {
+    max,
+    min,
+    sum,
+    avg
+  }
+}
+const stats = getStats(reviews);
+
+const animal = 'dog';
+const name = 'Sammy';
+
+//old way
+
+const critter = {};
+critter[animal] = name;
+console.log (critter);
+
+//new way
+
+const critter = {
+  [animal]: name
+}
+the keyword this:
+
+the keyword this can be one of the hardest things for new developers;
+
+this; is a keyword, it refers to the current exicutions scope.
+this will return an object depending on where it is called.
+
+function greet() {
+  console.log("HI")
+  console.log(this);
+}
+
+we see an object called "Window"
+but what is the window?
+the window is this thing that has been working int he background every time we make a function
+if we look in the window object we can find our greet function
+when we make a var of any kind it is saved to the window
+This only applys to client side front end, node the window is different.
+
+alert("LoL");
+we can also call this function with
+window.alert('window test')
+ let and const are not added to the window but the keyword var is
+
+const test1 = function () {
+  console.log(this);
+}
+its a refrence to an object and that object refers to the current exicutions scope
+
+const pokemon = {
+  name: 'Gastly",
+  type: "ghost",
+  level: '18',
+  summary() {
+    console.log(this);
+  }
+}
+
+they keyword this is not set to something else other then the window object;
+now change teh above function to have this include this bit of code
+
+summary() {
+    console.log(this.name);
+  }
+
+  then change it to 
+
+  summary() {
+    console.log(`${this.name} is a ${this.level} ${this.type} pokemon`);
+  }
+  then we can destructure the keyword this.
+
+   summary() {
+    const {name, type, level } = this;
+    console.log(`${name} is a ${level} ${type} pokemon`);
+  }
+now lets change the console.log to be a return 
+
+const pokemon = {
+  name: 'Gastly",
+  type: "ghost",
+  level: '18',
+  summary() {
+    const {name, type, level } = this;
+    return (`${name} is a ${level} ${type} pokemon`);
+  },
+printData(){
+  const allData = this.summary();
+  console.log(`${allData} and my favorite one!)
+  }
+}
+
+the value of this will change depending on when and where we call it.
+underneath our pokemon func lets make a new variable
+
+const printData = pokemon.printData;
+now if we call this function in our console we get an error
+this is the confusing part, the value of this is not set in stone
+the value of this depends on the invocation context
+
+const pokemon = {
+  name: 'Gastly",
+  type: "ghost",
+  level: '18',
+  summary() {
+    const {name, type, level } = this;
+    return (`${name} is a ${level} ${type} pokemon`);
+  },
+printData(){
+  console.log(this)
+  const allData = this.summary();
+  console.log(`${allData} and my favorite one!)
+  },
+  words: () => {
+    console.log(this);
+    console.log(`${this.name} says Gastly..Gast..`)
+  }
+}
+
+const pokeDex = {
+  pokemon: ['Squrtal', 'Pikachew', 'charmander', 'gastly', 'snorelax', 'haunter'],
+  pickPokemon(){
+    const {pokemon} = this;
+    const idx = Math.floor(Math.random() * pokemon.length)
+    return pokemon[idx]
+  },
+  start(){
+    setInterval(function(){
+      console.log("test")
+    }, 3000)
+  }
+}
+
+now try and run pokeDex.pickPokemon()
+now lets change our start method
+
+const pokeDex = {
+  pokemon: ['Squrtal', 'Pikachew', 'charmander', 'gastly', 'snorelax', 'haunter'],
+  pickPokemon(){
+    const {pokemon} = this;
+    const idx = Math.floor(Math.random() * pokemon.length)
+    return pokemon[idx]
+  },
+  start(){
+    console.log(this.pickPokemon())
+    setInterval(function(){
+      console.log(this.pickPokemon())
+    }, 3000)
+  }
+}
+
+we get an error, but why
+beacsue function keyword binds its own keyword this
+lets try chaing it to be an arrow function 
+
+const pokeDex = {
+  pokemon: ['Squrtal', 'Pikachew', 'charmander', 'gastly', 'snorelax', 'haunter'],
+  pickPokemon(){
+    const {pokemon} = this;
+    const idx = Math.floor(Math.random() * pokemon.length)
+    return pokemon[idx]
+  },
+  start(){
+    setInterval(() => {
+      console.log(this.pickPokemon())
+    }, 3000)
+  }
+}
+
+so we want to use a normal function when we are trying to bind this
+but an arrow func when we want it to inherit from its parent element
+
+lets put a stop functionality into our timer
+
+const pokeDex = {
+  pokemon: ['Squrtal', 'Pikachew', 'charmander', 'gastly', 'snorelax', 'haunter'],
+  pickPokemon(){
+    const {pokemon} = this;
+    const idx = Math.floor(Math.random() * pokemon.length)
+    return pokemon[idx]
+  },
+  start(){
+    this.timerId = setInterval(() => {
+      console.log(this.pickPokemon())
+    }, 3000)
+  },
+  stop() {
+    clearInterval(this.timerId)
+    conosle.log('pokeDex turned off')
+  }
+}
