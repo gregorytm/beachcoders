@@ -1,0 +1,28 @@
+setting up a personal access tokens
+
+go to github
+click on ur portrate in top right
+scrole down to developer settings on left menue
+personal access tokens
+name token
+
+check repo, admin:org, admin:repo_hook
+create token
+
+For mack
+got to keychain (command space: "keychain");
+search github
+click on the account for correct github account 
+check show password
+enter in comp password
+paste current token
+
+for windows
+control pannel ->user account ->credential manager
+under generic credientails
+find or add github
+edit button
+update password
+
+for ssh
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh
