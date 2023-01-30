@@ -1,5 +1,5 @@
 const db = require("../../db");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const {
   NotFoundError,
@@ -7,7 +7,7 @@ const {
   UnauthorizedError,
 } = require("../../ExpressError");
 
-// const { BCRYPT_WORK_FACTOR } = require("../../config.js");
+const { BCRYPT_WORK_FACTOR } = require("../../config.js");
 
 class Employee {
   static async register({
@@ -27,6 +27,14 @@ class Employee {
 
     if (duplicateCheck.rows[0]) {
       throw new BadRequestError(`Duplicate username: ${username}`);
+    }
+
+    try {
+      const salt = await bcrypt.genSalt(BCRYPT_WORK_FACTOR);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      password = hashedPassword;
+    } catch (err) {
+      throw new BadRequestError(err);
     }
 
     const result = await db.query(
