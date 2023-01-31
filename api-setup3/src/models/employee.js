@@ -48,9 +48,7 @@ class Employee {
         RETURNING username, first_inital AS "firstInital", last_name AS "lastName", role`,
       [username, password, firstInital, lastName, role]
     );
-
     const employee = result.rows[0];
-
     return employee;
   }
   static async getAll() {

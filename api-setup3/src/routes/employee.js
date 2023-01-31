@@ -17,9 +17,9 @@ router.post("/register", async function (req, res, next) {
   try {
     const newEmployee = await Employee.register({
       ...req.body,
-      role: null,
     });
-    return res.status(201, newEmployee);
+    console.log("test", newEmployee);
+    return res.status(201).json({ newEmployee });
   } catch (err) {
     return next(err);
   }
