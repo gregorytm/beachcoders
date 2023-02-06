@@ -1,6 +1,11 @@
+// require("dotenv").config();
+
 const express = require("express");
-const { BadRequestError } = require("../../ExpressError");
+const { BadRequestError, NotFoundError } = require("../../ExpressError");
 const Employee = require("../models/Employee");
+import { authenticateToken } from "../middleware/authenticateToken";
+const { SECRET_KEY } = require("../../config");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -20,6 +25,18 @@ router.post("/register", async function (req, res, next) {
     });
     console.log("test", newEmployee);
     return res.status(201).json({ newEmployee });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.post("/login", async function (req, res, next) {
+  try {
+    const { username, password } = req.body;
+    const employee = await Employee.login(username, password);
+    console.log("11", SECRET_KEY);
+    const accessToken = jwt.sign(employee, SECRET_KEY);
+    res.json({ accessToken: accessToken });
   } catch (err) {
     return next(err);
   }

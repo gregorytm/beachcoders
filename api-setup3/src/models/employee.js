@@ -62,6 +62,41 @@ class Employee {
     );
     return result.rows;
   }
+
+  static async get(username) {
+    const employeeRes = await db.query(
+      `SELECT id,
+      username,
+      password
+      FROM employee
+      WHERE employee.username = $1`,
+      [username]
+    );
+    const employee = employeeRes.rows[0];
+    if (!employee) throw new NotFoundError(`No employee found`);
+    return employee;
+  }
+
+  static async login(username, password) {
+    //try to find the employee first
+    const result = await db.query(
+      `SELECT id,
+      username,
+      password
+      FROM employee
+      WHERE employee.username = $1`,
+      [username]
+    );
+    const employee = result.rows[0];
+    if (employee) {
+      const isValid = await bcrypt.compare(password, employee.password);
+      if (isValid === true) {
+        delete employee.password;
+        return employee;
+      }
+    }
+    throw new UnauthorizedError("3 invalid employee/password");
+  }
 }
 
 module.exports = Employee;
