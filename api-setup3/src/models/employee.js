@@ -63,14 +63,15 @@ class Employee {
     return result.rows;
   }
 
-  static async get(username) {
+  static async get(id) {
     const employeeRes = await db.query(
       `SELECT id,
       username,
-      password
+      password,
+      role
       FROM employee
-      WHERE employee.username = $1`,
-      [username]
+      WHERE employee.id = $1`,
+      [id]
     );
     const employee = employeeRes.rows[0];
     if (!employee) throw new NotFoundError(`No employee found`);
@@ -95,7 +96,33 @@ class Employee {
         return employee;
       }
     }
-    throw new UnauthorizedError("3 invalid employee/password");
+    throw new UnauthorizedError("invalid employee/password");
+  }
+
+  static async authenticate(username, password) {
+    const result = await db.query(
+      `SELECT id,
+      username,
+      password,
+      first_inital AS "firstInital",
+      last_name AS "LastName",
+      role
+      FROM employee
+      WHERE username =$1`,
+      [username]
+    );
+    const employee = result.rows[0];
+    console.assert(employee, `user not found${username}`);
+
+    if (employee) {
+      const isValid = await bcrypt.compare(password, employee.password);
+      console.assert(isValid, "invalid password supplied");
+      if (isValid === true) {
+        delete employee.password;
+        return employee;
+      }
+    }
+    throw new UnauthorizedError("Invalid username/password");
   }
 }
 
