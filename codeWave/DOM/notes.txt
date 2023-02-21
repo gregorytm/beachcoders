@@ -1,0 +1,6 @@
+What is the dom?
+javascript representaiton of a webpage--logic
+select and minipulate
+
+create index.js app.js style.css files
+
