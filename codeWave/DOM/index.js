@@ -106,3 +106,66 @@ const par = document.querySelector("#main");
 console.log(par.innerText);
 //no script tag no spacing
 console.log(par.textContent);
+
+const form = document.querySelector("form");
+console.log(form.innerHTML);
+
+const newUl = document.querySelector("ul");
+console.log(newUl.innerHTML);
+
+// form.innerHTML = "HELLO WORLD";
+//comment out after example
+//innerText would be better but it works
+
+form.innerHTML = "<b>i am a bold tag</b>";
+
+h1.innerHTML += " is cool";
+h1.innerHTML += "<b>!!!!!!!</b>";
+h1.innerText += "<b>!!!!!</b>";
+
+console.dir("inputs");
+//in console scrole down and find the property value
+//put some txt in the name value
+// in console run inputs[0].value we see our txt
+//same with password
+//what about our checkbox?  inputs[0].value is the same if its on or off
+//check boxes have a seprate value, checked inputs[2].checked
+
+inputs[3].value;
+//we see where the range is set to
+
+inputs[1].placeholder = "test test";
+
+const a = document.querySelector("a");
+
+console.log(a.href);
+a.href = "http://www.fontAwesome.com";
+
+img.src = "new img url";
+
+const range = document.querySelector("input[type=range]");
+console.log(range.getAttribute("max"));
+consosle.log(range.getAttribute("min"));
+console.log(range.getAttribute("type"));
+range.setAttribute("min", "3");
+
+//Child and parent elements
+const firstLi = document.querySelector("li");
+console.dir(firstLi); //look for parentElement property
+
+ul.children; //gives back all the children elements
+firstLi.nextElementSibling; //we get the next sibling
+//previous sibling
+
+//dom & styles
+console.dir(h1.style.color);
+//this returns an empty string
+//this it can only see styles u have set inline
+//we dont want to do this
+h1.style.color = "green";
+p.style.color = "white";
+//we must cammelCase things for inline stuff its js not css
+// p.style.background-color="black"
+
+const styles = getComputedStyle(li);
+//in console type styles
