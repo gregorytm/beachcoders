@@ -169,3 +169,72 @@ p.style.color = "white";
 
 const styles = getComputedStyle(li);
 //in console type styles
+
+//try below but then comment out but then make css class
+const todo = document.querySelector("#todos.todo");
+todo.style.color = "grey";
+todo.style.textDecoration = "link";
+todo.style.opacity = "50%";
+
+//make css class .done, then comment out above
+todo.getAttribute("class");
+todo.setAttribute("class", "done");
+//this removes todo class, not good approach
+todo.setAttribute("class", " todo done");
+consoel.log(todo.classList);
+
+todo.classList.remove("done");
+todo.classList.add("done");
+
+//what if we want to toggle it on or of depending on if class is their or not.
+todo.classList.toggle("done");
+todo.classList.toggle("done");
+//toggle returns true and false, to see, type todo.classList.toggle("done") in console.
+
+//Now onto create element
+const newh2 = document.createElement("h2");
+console.dir(newh2);
+//it created a new h2 element
+newh2.innerText = "my new h2";
+console.dir(newh2);
+newh2.classList.add("special");
+console.dir(newh2);
+//but how do i get it into the dom
+const section = (document.section = document.querySelector("section"));
+section.appenedChild(newh2);
+
+//img
+const img = document.createElement("img");
+newImg.src = "img url";
+
+//add a css class to give it width
+
+const newLink = document.createElement("a");
+newLink.innerText = "my youtube vid";
+newLink.href = "new url link";
+
+const firstP = document.querySelector("p");
+firstP.appendChild(newLink);
+
+const parentUl = document.querySelector("ul");
+const newLi = document.createElement("li");
+newLi.innerText = "I am a new li";
+parent.Ul.appendChild(newLi);
+const topLI = document.querySelector("li.todo");
+parentUl.insertBefore(newLi, topLI);
+const lastUl = document.querySelectorAll("li.todo")[2];
+//big and cumbersom approach
+
+//append() and prepend()
+const i = document.createElement("i");
+i.innerText = "Italic text";
+firstP.append(i, newLi);
+firstP.prepend(i, newLi);
+//append and appendChild are smiliar but appendChild can only be one thing at a time
+
+//removeChild()
+const specialUl = document.querySelector("section ul");
+const removeMe = specialUl.querySelector(".special");
+ul.removeChild(removeMe);
+//remove
+h1.remove();
